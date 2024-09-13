@@ -1,5 +1,5 @@
 <template>
-    <AddUser></AddUser>
+    <AddUser/>
 </template>
 
 <script setup>

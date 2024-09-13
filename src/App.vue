@@ -1,11 +1,8 @@
 <script setup>
-// import { RouterLink, RouterView } from 'vue-router'
-// import AddUser from './components/AddUser.vue'
+import { RouterLink, RouterView } from 'vue-router'
+
 </script>
 
 <template>
-
-  <!-- <RouterLink> -->
-  
   <RouterView />
 </template>
