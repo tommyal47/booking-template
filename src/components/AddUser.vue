@@ -1,16 +1,16 @@
 <template>
   <v-sheet class="mx-auto" width="300">
-    <v-form fast-fail @submit.prevent>
+    <v-form fast-fail @submit.prevent="addUser">
       <v-text-field clearable v-model="user.fullName" label="Full name" variant="solo"
         :rules="[nameValidation]"></v-text-field>
 
       <v-text-field clearable v-model="user.emailAddress" label="Email Address" type="email"
         placeholder="johndoe@gmail.com" variant="solo" :rules="[emailRules]"></v-text-field>
 
-      <v-text-field clearable v-model="user.phoneNumber" label="Phone Number" type="phone" variant="solo"
+      <v-text-field clearable v-model="user.phoneNumber" label="Phone Number" type="number" variant="solo"
         :rules="[phoneRules]"></v-text-field>
 
-      <v-btn class="mt-2" type="submit" @click="addUser" block>Submit</v-btn>
+      <v-btn class="mt-2" type="submit"  block>Submit</v-btn>
     </v-form>
   </v-sheet>
 </template>
