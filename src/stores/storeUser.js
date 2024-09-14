@@ -11,7 +11,7 @@ export const useUserStore = defineStore('storeUser', {
       user = {
         id: Date.now(),
         fullName: user.fullName,
-        email: user.email,
+        email: user.emailAddress,
         phoneNumber: user.phoneNumber,
       }
       if (user) {

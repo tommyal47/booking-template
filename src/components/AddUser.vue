@@ -6,7 +6,7 @@
 
       <v-text-field clearable v-model="user.emailAddress" label="Email Address" type="email"
         placeholder="johndoe@gmail.com" variant="solo" :rules="emailRules"></v-text-field>
-        
+
       <v-text-field clearable v-model="user.phoneNumber" label="Phone Number" type="phone" variant="solo"
         :rules="phoneRules"></v-text-field>
 
@@ -53,9 +53,14 @@ const phoneRules = ref([
 ]);
 
 const addUser = () => {
-  console.log(user.value);
+  if (user.value.fullName && user.value.emailAddress && user.value.phoneNumber) {
 
-  storeUser.addUser(user.value)
+    // console.log(user.value.length.fullName);
+
+    storeUser.addUser(user.value)
+    console.log(storeUser.users);
+    // console.log(user.value.fullName);
+  }
 }
 
 </script>
