@@ -14,8 +14,16 @@
 <script setup>
 
 import { ref, computed } from 'vue'
+import { useRouter } from 'vue-router';
+
+const router = useRouter()
 
 const admin = ref({})
+
+const data = {
+    user_name: 'admin',
+    user_password: '12345'
+}
 
 const nameRules = computed(() => {
     if (admin.value.userName) return true
@@ -30,7 +38,10 @@ const passwordRules = computed(() => {
 })
 
 const logIn = () => {
-    localStorage.setItem('auth', true)
+    if (admin.value.userName === data.user_name && admin.value.userPassword === data.user_password){
+        localStorage.setItem('auth', true)
+        router.push('/users')
+    }else alert('invalid user name or password')
 }
 
 </script>

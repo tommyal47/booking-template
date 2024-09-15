@@ -37,5 +37,12 @@ const router = createRouter({
     // }
   ]
 })
-
+function isAuthenticated() {
+  return !!localStorage.getItem('auth');  // Check for a token in localStorage (or any auth status)
+}
+router.beforeEach((to, from, next) => {
+  if(to.name !== 'login' && !isAuthenticated()) next({name: 'login'})
+  else next()
+  
+})
 export default router
