@@ -20,6 +20,6 @@ export const useUserStore = defineStore('storeUser', {
         
       }
     }
-  }
+  },
   
 })

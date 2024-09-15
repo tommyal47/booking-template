@@ -10,7 +10,7 @@
       <v-text-field clearable v-model="user.phoneNumber" label="Phone Number" type="number" variant="solo"
         :rules="[phoneRules]"></v-text-field>
 
-      <v-btn class="mt-2" type="submit"  block>Submit</v-btn>
+      <v-btn class="mt-2" type="submit" block>Submit</v-btn>
     </v-form>
   </v-sheet>
 </template>
@@ -19,16 +19,18 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { useUserStore } from '@/stores/storeUser';
+import { useRouter } from 'vue-router';
+const router = useRouter()
 
 const storeUser = useUserStore()
 
 const user = ref({})
 
 const emailRules = computed(() => {
-    if (user.value.emailAddress) return true
+  if (user.value.emailAddress) return true
 
-    return 'Email is required'
-  }
+  return 'Email is required'
+}
 )
 const nameValidation = computed(() => {
   if (user.value.fullName?.length >= 3) return true
@@ -38,16 +40,17 @@ const nameValidation = computed(() => {
 
 
 const phoneRules = computed(() => {
-    if (user.value.phoneNumber?.length === 11) return true
+  if (user.value.phoneNumber?.length === 11) return true
 
-    return 'Phone number must be 11 degits'
-  }
+  return 'Phone number must be 11 degits'
+}
 );
 
 const addUser = () => {
   if (user.value.fullName && user.value.emailAddress && user.value.phoneNumber) {
     storeUser.addUser(user.value)
     console.log(storeUser.users);
+    router.push(`/users`)
   }
 }
 
