@@ -9,7 +9,8 @@
         </v-form>
     </v-sheet>
     <div>
-        <v-alert color="#2A3B4D" density="compact" icon="mdi-firework" theme="dark" v-model="active">
+        <v-alert class="alert-error" color="red" type="error" density="compact" icon="mdi-firework" theme="dark"
+            v-model="active">
             Invalid username or password
         </v-alert>
     </div>
@@ -53,3 +54,15 @@ const logIn = () => {
 }
 
 </script>
+
+<style>
+.alert-error {
+    margin-left: 0%;
+    position: absolute;
+    margin-top: -320px;
+}
+
+.v-alert__content {
+    padding-right: 36px;
+}
+</style>
