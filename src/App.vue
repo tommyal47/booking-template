@@ -1,16 +1,17 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import { useLoggedIn } from './use/useLoggedIn';
+import { ref } from 'vue';
+import { RouterView } from 'vue-router'
 
-const loggedIn = useLoggedIn()
-// console.log(loggedIn.logged.value);
-// loggedIn.toggleLogin()
-// console.log(loggedIn.logged.value);
+const loggedIn = ref(localStorage.getItem('auth'));
 
+const handleLogout = () => {
+  localStorage.clear();
+  window.location.href = '/login';
+}
 
 </script>
 
 <template>
-  <v-btn v-if="loggedIn.logged.value">logout</v-btn>
+  <v-btn v-if="loggedIn" @click="handleLogout">logout</v-btn>
   <RouterView />
 </template>

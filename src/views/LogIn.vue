@@ -8,17 +8,20 @@
             <v-btn class="mt-2" text="Submit" type="submit" block></v-btn>
         </v-form>
     </v-sheet>
+    <div>
+        <v-alert color="#2A3B4D" density="compact" icon="mdi-firework" theme="dark" v-model="active">
+            Invalid username or password
+        </v-alert>
+    </div>
 </template>
 
 
 <script setup>
 
 import { ref, computed } from 'vue'
-import { useRouter } from 'vue-router';
-
-const router = useRouter()
 
 const admin = ref({})
+const active = ref(false)
 
 const data = {
     user_name: 'admin',
@@ -38,10 +41,15 @@ const passwordRules = computed(() => {
 })
 
 const logIn = () => {
-    if (admin.value.userName === data.user_name && admin.value.userPassword === data.user_password){
+    if (admin.value.userName === data.user_name && admin.value.userPassword === data.user_password) {
         localStorage.setItem('auth', true)
-        router.push('/users')
-    }else alert('invalid user name or password')
+        window.location.href = '/users'
+    } else {
+        active.value = true
+        setTimeout(() => {
+            active.value = false
+        }, 3000)
+    }
 }
 
 </script>
