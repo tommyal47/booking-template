@@ -6,13 +6,13 @@
                     <v-card class="mx-auto" width="400" prepend-icon="" title="User data"
                         :subtitle="'ID: ' + props.user.id">
                         <v-card-item>
-                            Name: {{ props.user.fullName }}
+                            Name: {{ user.fullName }}
                         </v-card-item>
                         <v-card-item>
-                            Email: {{ props.user.email }}
+                            Email: {{ user.email }}
                         </v-card-item>
                         <v-card-item>
-                            Phone Number: {{ props.user.phoneNumber }}
+                            Phone Number: {{ user.phoneNumber }}
                         </v-card-item>
                         <template v-slot:actions>
                             <v-btn class="ms-auto" text="Ok" @click="$emit('handleCloseDialog')"></v-btn>
@@ -33,7 +33,7 @@ const props = defineProps({
         Required: true,
     }
 })
-console.log(props.user);
+// console.log(props.user);
 
 const dialog = ref(true);
 const emit = defineEmits(['handleCloseDialog'])

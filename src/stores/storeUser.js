@@ -8,7 +8,7 @@ export const useUserStore = defineStore('storeUser', {
           id: 1,
           fullName: 'John Doe',
           email: 'john.doe@example.com',
-          phoneNumber: '123-456-7890',
+          phoneNumber: '1234567890',
         }
       ],
     }
