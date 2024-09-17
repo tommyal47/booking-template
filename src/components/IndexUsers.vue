@@ -1,16 +1,17 @@
 <template>
+    <v-btn class="add-btn" @click="router.push('/add_user')">add user</v-btn>
     <v-data-table :headers="headers" :items="userStore.users" density="compact" item-key="name">
-        <template v-slot:item.actions>
+        <template v-slot:item.actions="{ item }">
             <div class="d-flex justify-space-around flex-wrap pa-2 ml-30">
-                <v-btn class="ma-2" @click="showUser" color="green-lighten-1" size="33px" icon="mdi-eye"></v-btn>
+                <v-btn class="ma-2" @click="showUser(item)" color="green-lighten-1" size="33px" icon="mdi-eye"></v-btn>
                 <v-btn class="ma-2" color="green-lighten-1" size="33px" icon="mdi-pencil"></v-btn>
                 <v-btn class="ma-2" color="orange-lighten-1" size="33px" icon="mdi-delete"></v-btn>
             </div>
         </template>
     </v-data-table>
-    <v-btn @click="router.push('/add_user')">back</v-btn>
+
     <div v-if="openShowDialog">
-        <ShowUser @handleCloseDialog="handleCloseDialog" />
+        <ShowUser :user="user" @handleCloseDialog="handleCloseDialog" />
     </div>
 </template>
 
@@ -24,7 +25,10 @@ import { useRouter } from 'vue-router';
 const router = useRouter()
 
 
+
 const userStore = useUserStore();
+// console.log(userStore.users[0].id);
+
 const headers = ref([
     { title: 'name', align: 'center', key: 'fullName' },
     { title: 'email', align: 'center', key: 'email' },
@@ -34,13 +38,27 @@ const headers = ref([
 
 const openShowDialog = ref(false);
 
-const showUser = () => {
+const user = ref(null);
+
+const showUser = (item) => {
     openShowDialog.value = true;
+    user.value = item;
+    // console.log(id);
+
 }
-console.log(userStore.users);
+// console.log(userStore.users);
 
 const handleCloseDialog = () => {
     openShowDialog.value = false;
 }
 
 </script>
+
+
+<style>
+.add-btn {
+    float: left;
+
+
+}
+</style>

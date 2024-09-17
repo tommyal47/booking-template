@@ -12,6 +12,13 @@ const handleLogout = () => {
 </script>
 
 <template>
-  <v-btn v-if="loggedIn" @click="handleLogout">logout</v-btn>
+  <v-btn class="log-btn" v-if="loggedIn" @click="handleLogout">logout</v-btn>
   <RouterView />
 </template>
+
+<style>
+.log-btn {
+  margin-left: 407px;
+
+}
+</style>
