@@ -1,9 +1,10 @@
 <template>
     <v-sheet class="mx-auto" width="300">
-        <v-form validate-on="submit lazy" @submit.prevent="logIn">
-            <v-text-field v-model="admin.userName" :rules="[nameRules]" label="User name" variant="solo"></v-text-field>
-            <v-text-field v-model="admin.userPassword" :rules="[passwordRules]" label="Password" type="password"
+        <v-form @submit.prevent="logIn">
+            <v-text-field v-model="admin.userName" :rules="[nameRules]" label="User name"
                 variant="solo"></v-text-field>
+            <v-text-field autocomplete v-model="admin.userPassword" :rules="[passwordRules]" label="Password"
+                type="password" variant="solo"></v-text-field>
 
             <v-btn class="mt-2" text="Submit" type="submit" block></v-btn>
         </v-form>
@@ -30,7 +31,7 @@ const data = {
 }
 
 const nameRules = computed(() => {
-    if (admin.value.userName?.length) return true
+    if (admin.value.userName) return true
 
     return 'User name is required'
 })

@@ -59,6 +59,8 @@ const showUser = (item) => {
 const editUser = (item) => {
     openEditDialog.value = true;
     user.value = item;
+    // console.log('item', item);
+
 }
 // console.log(userStore.users);
 
