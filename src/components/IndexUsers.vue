@@ -1,12 +1,13 @@
 <template>
     <v-btn class="add-btn" @click="router.push('/add_user')">add user</v-btn>
     <v-data-table :headers="headers" :items="userStore.users" density="compact" item-key="name">
-        <template v-slot:item.actions="{ item }">
+        <template v-slot:[`item.actions`]="{ item }">
             <div class="d-flex justify-space-around flex-wrap pa-2 ml-30">
                 <v-btn class="ma-2" @click="showUser(item)" color="green-lighten-1" size="33px" icon="mdi-eye"></v-btn>
                 <v-btn class="ma-2" @click="editUser(item)" color="green-lighten-1" size="33px"
                     icon="mdi-pencil"></v-btn>
-                <v-btn class="ma-2" color="orange-lighten-1" size="33px" icon="mdi-delete"></v-btn>
+                <v-btn class="ma-2" @click="handleDeleteUSer(item.id)" color="orange-lighten-1" size="33px"
+                    icon="mdi-delete"></v-btn>
             </div>
         </template>
     </v-data-table>
@@ -26,10 +27,12 @@ import { useUserStore } from '@/stores/storeUser';
 import ShowUser from './ShowUser.vue';
 import EditUser from './EditUser.vue';
 import { ref } from 'vue';
+import Swal from 'sweetalert2';
+// import handleDeleteUser from './DeleteUser.vue'
 import { useRouter } from 'vue-router';
 const router = useRouter()
 
-
+// const handleDelere = handleDeleteUser()
 
 const userStore = useUserStore();
 // console.log(userStore.users[0].id);
@@ -66,6 +69,53 @@ const handleEditDialog = () => {
     openEditDialog.value = false;
 }
 
+
+// handle delete user
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+const handleDeleteUSer = (id) => {
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: "btn btn-success text-white",
+            cancelButton: "btn btn-danger text-white"
+        },
+        buttonsStyling: true
+    });
+    swalWithBootstrapButtons.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel!",
+        reverseButtons: true,
+        // customClass: {
+        //     // confirmButton: 'swal-confirm-button', // Add a custom class to the confirm button
+        //     // cancelButton: 'swal-cancel-button',   // Optional: add a class to the cancel button if needed
+        // },
+    }).then((result) => {
+        if (result.isConfirmed) {
+            userStore.deleteUser(id)
+            swalWithBootstrapButtons.fire({
+                title: "Deleted!",
+                text: "User has been deleted successfully.",
+                icon: "success"
+            });
+        } else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === Swal.DismissReason.cancel
+        ) {
+            swalWithBootstrapButtons.fire({
+                title: "Cancelled",
+                text: "Delete has been cancelled",
+                icon: "error"
+            });
+        }
+    });
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////
 </script>
 
 
