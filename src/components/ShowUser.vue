@@ -36,5 +36,6 @@ const props = defineProps({
 // console.log(props.user);
 
 const dialog = ref(true);
+// eslint-disable-next-line no-unused-vars
 const emit = defineEmits(['handleCloseDialog'])
 </script>

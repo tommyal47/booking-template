@@ -30,7 +30,7 @@ const data = {
 }
 
 const nameRules = computed(() => {
-    if (admin.value.userName) return true
+    if (admin.value.userName?.length) return true
 
     return 'User name is required'
 })
@@ -42,14 +42,16 @@ const passwordRules = computed(() => {
 })
 
 const logIn = () => {
-    if (admin.value.userName === data.user_name && admin.value.userPassword === data.user_password) {
-        localStorage.setItem('auth', true)
-        window.location.href = '/users'
-    } else {
-        active.value = true
-        setTimeout(() => {
-            active.value = false
-        }, 3000)
+    if (admin.value.userName && admin.value.userPassword) {
+        if (admin.value.userName === data.user_name && admin.value.userPassword === data.user_password) {
+            localStorage.setItem('auth', true)
+            window.location.href = '/users'
+        } else {
+            active.value = true
+            setTimeout(() => {
+                active.value = false
+            }, 3000)
+        }
     }
 }
 
