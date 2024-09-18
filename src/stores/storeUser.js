@@ -26,6 +26,16 @@ export const useUserStore = defineStore('storeUser', {
         console.log(user);
         
       }
+    },
+    editUSer (user) {
+      const index = this.users.findIndex((u) => u.id === user.id)
+      this.users[index].fullName = user.fullName
+      this.users[index].email = user.email
+      this.users[index].phoneNumber = user.phoneNumber
+    },
+
+    deleteUser(id){
+      this.users = this.users.filter(user => user.id !== id)
     }
   },
   

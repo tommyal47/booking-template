@@ -3,17 +3,18 @@
         <v-dialog v-model="dialog" persistent>
             <v-card class="mx-auto" width="400" prepend-icon="" title="Edit User Data">
                 <v-sheet class="mx-auto" width="300">
-                    <v-form fast-fail @submit.prevent>
-                        <v-text-field v-model="user.fullName" clearable label="Full name" variant="solo"
-                            rules="[nameValidation]"></v-text-field>
+                    <v-form fast-fail @submit.prevent="updateUser">
+                        <v-text-field :v-model="user.fullName" clearable label="Full name" variant="solo"
+                            :rules="[nameValidation]"></v-text-field>
 
-                        <v-text-field v-model="user.email" clearable label="Email Address" type="email"
-                            placeholder="johndoe@gmail.com" variant="solo" rules="[emailRules]"></v-text-field>
+                        <v-text-field :v-model="user.email" clearable label="Email Address" type="email"
+                            placeholder="johndoe@gmail.com" variant="solo" :rules="[emailRules]"></v-text-field>
 
-                        <v-text-field v-model="user.phoneNumber" clearable label="Phone Number" type="number"
-                            variant="solo" rules="[phoneRules]"></v-text-field>
+                        <v-text-field :v-model="user.phoneNumber" clearable label="Phone Number" type="number"
+                            variant="solo" :rules="[phoneRules]"></v-text-field>
 
-                        <v-btn class="mt-2" type="submit" @click="$emit('handleEditDialog')" block>Submit</v-btn>
+                        <v-btn class="mt-2" type="submit" block>Submit</v-btn>
+                        <v-btn class="mt-2" @click="$emit('handleEditDialog')" block>cancel</v-btn>
                     </v-form>
                 </v-sheet>
                 <!-- <template v-slot:actions>
@@ -27,7 +28,10 @@
 
 <script setup>
 
-import { ref, defineEmits, defineProps } from 'vue';
+import { ref, defineEmits, defineProps, computed } from 'vue';
+import { useUserStore } from '@/stores/storeUser';
+
+const userStore = useUserStore();
 
 const dialog = ref(true);
 
@@ -39,6 +43,32 @@ const props = defineProps({
         required: true
     }
 })
+const emailRules = computed(() => {
+    if (props.user.email) return true
+
+    return 'Email is required'
+}
+)
+const nameValidation = computed(() => {
+    if (props.user.fullName?.length >= 3) return true
+
+    return 'Full name must be at least 3 characters.'
+})
+
+
+const phoneRules = computed(() => {
+    if (props.user.phoneNumber?.length === 11) return true
+
+    return 'Phone number must be 11 degits'
+}
+);
+const updateUser = () => {
+    userStore.editUSer(props.user);
+    emit('handleEditDialog')
+
+
+
+}
 
 console.log(props.user);
 

@@ -1,7 +1,7 @@
 <template>
     <div class="text-center pa-4">
         <v-dialog v-model="dialog" persistent>
-            <v-row align="center" justify="center" dense>
+            <v-row align:center justify="center" dense>
                 <v-col cols="12" md="6">
                     <v-card class="mx-auto" width="400" prepend-icon="" title="User data"
                         :subtitle="'ID: ' + props.user.id">
