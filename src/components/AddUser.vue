@@ -1,5 +1,6 @@
 <template>
   <v-sheet class="mx-auto" width="300">
+    <v-btn class="back-btn" icon="mdi-arrow-left-thick" @click="router.push('/users')"></v-btn>
     <v-form fast-fail @submit.prevent="addUser">
       <v-text-field clearable v-model="user.fullName" label="Full name" variant="solo"
         :rules="[nameValidation]"></v-text-field>
@@ -11,6 +12,7 @@
         :rules="[phoneRules]"></v-text-field>
 
       <v-btn class="mt-2" type="submit" block>Submit</v-btn>
+      <!-- <v-btn class="mt-2" block>back</v-btn> -->
     </v-form>
   </v-sheet>
 </template>
@@ -55,3 +57,17 @@ const addUser = () => {
 }
 
 </script>
+
+<style>
+.back-btn {
+  margin-right: 16px;
+}
+
+.back-btn {
+  position: absolute;
+  margin: -58px;
+  margin-left: -75px;
+  color: lightslategrey;
+  background-color: floralwhite;
+}
+</style>
