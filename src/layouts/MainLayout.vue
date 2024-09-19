@@ -1,15 +1,10 @@
 <template>
-    <v-layout class="rounded rounded-md">
-        <v-app-bar color="green-darken-1" title="Application bar">
-            <v-btn class="log-btn" @click="handleLogout">logout</v-btn>
-        </v-app-bar>
-    </v-layout>
+    <SideBar />
+    <NavBar />
 </template>
 
 <script setup>
-const handleLogout = () => {
-    localStorage.clear();
-    window.location.href = '/login';
-}
+import NavBar from './components/NavBar.vue';
+import SideBar from './components/SideBar.vue';
 
 </script>
