@@ -4,18 +4,18 @@
             <v-row align:center justify="center" dense>
                 <v-col cols="12" md="6">
                     <v-card class="mx-auto" width="400" prepend-icon="" title="User data"
-                        :subtitle="'ID: ' + props.user.id">
+                        :subtitle="$t('ID') + ': ' + props.user.id">
                         <v-card-item>
-                            Name: {{ user.fullName }}
+                            {{$t('Name')}}: {{ user.fullName }}
                         </v-card-item>
                         <v-card-item>
-                            Email: {{ user.email }}
+                            {{$t('Email')}}: {{ user.email }}
                         </v-card-item>
                         <v-card-item>
-                            Phone Number: {{ user.phoneNumber }}
+                            {{$t('Phone')}}: {{ user.phoneNumber }}
                         </v-card-item>
                         <template v-slot:actions>
-                            <v-btn class="ms-auto" text="Ok" @click="$emit('handleCloseDialog')"></v-btn>
+                            <v-btn class="ms-auto" :text="$t('Close')" @click="$emit('handleCloseDialog')"></v-btn>
                         </template>
                     </v-card>
                 </v-col>

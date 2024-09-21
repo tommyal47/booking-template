@@ -2,10 +2,16 @@
     "Home": "Home",
     "Users": "Users",
     "AddUser": "Add User",
-    "name": "Name",
-    "email": "Email",
-    "phone": "Phone",
-    "actions": "Actions",
-    "LogOut": "Log Out"
+    "ID": "ID",
+    "Name": "Name",
+    "Email": "Email",
+    "Phone": "Phone",
+    "Actions": "Actions",
+    "LogOut": "Log Out",
+    "Submit": "Submit",
+    "Cancel": "Cancel",
+    "Close": "Close",
+    "ApplicationName": "Application Name",
+    "itemsPerPage": "items per page"
 
 }

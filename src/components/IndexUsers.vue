@@ -1,5 +1,5 @@
 <template>
-    <v-btn class="add-btn" @click="router.push('/add-user')">add user</v-btn>
+    <v-btn class="add-btn" @click="router.push('/add-user')">{{ $t('AddUser') }}</v-btn>
     <v-data-table :headers="headers" :items="userStore.users" density="compact" item-key="name">
         <template v-slot:[`item.actions`]="{ item }">
             <div class="d-flex justify-space-around flex-wrap pa-2 ml-30">
@@ -26,10 +26,13 @@
 import { useUserStore } from '@/stores/storeUser';
 import ShowUser from './ShowUser.vue';
 import EditUser from './EditUser.vue';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import Swal from 'sweetalert2';
 // import handleDeleteUser from './DeleteUser.vue'
 import { useRouter } from 'vue-router';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n(); // Access the translation function
 const router = useRouter()
 
 // const handleDelere = handleDeleteUser()
@@ -37,11 +40,11 @@ const router = useRouter()
 const userStore = useUserStore();
 // console.log(userStore.users[0].id);
 
-const headers = ref([
-    { title: 'name', align: 'center', key: 'fullName' },
-    { title: 'email', align: 'center', key: 'email' },
-    { title: 'phone', align: 'center', key: 'phoneNumber' },
-    { title: 'actions', align: 'center', key: 'actions' }
+const headers = computed(() => [
+    { title: t('Name'), align: 'center', key: 'fullName' },
+    { title: t('Email'), align: 'center', key: 'email' },
+    { title: t('Phone'), align: 'center', key: 'phoneNumber' },
+    { title: t('Actions'), align: 'center', key: 'actions' }
 ])
 
 const openShowDialog = ref(false);

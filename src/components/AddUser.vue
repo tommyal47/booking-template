@@ -2,16 +2,16 @@
   <v-sheet class="mx-auto" width="300">
     <v-btn class="back-btn" icon="mdi-arrow-left-thick" @click="router.push('/users')"></v-btn>
     <v-form fast-fail @submit.prevent="addUser">
-      <v-text-field clearable v-model="user.fullName" label="Full name" variant="solo"
+      <v-text-field clearable v-model="user.fullName" :label="$t('Name')" variant="solo"
         :rules="[nameValidation]"></v-text-field>
 
-      <v-text-field clearable v-model="user.emailAddress" label="Email Address" type="email"
+      <v-text-field clearable v-model="user.emailAddress" :label="$t('Email')" type="email"
         placeholder="johndoe@gmail.com" variant="solo" :rules="[emailRules]"></v-text-field>
 
-      <v-text-field clearable v-model="user.phoneNumber" label="Phone Number" type="number" variant="solo"
+      <v-text-field clearable v-model="user.phoneNumber" :label="$t('Phone')" type="number" variant="solo"
         :rules="[phoneRules]"></v-text-field>
 
-      <v-btn class="mt-2" type="submit" block>Submit</v-btn>
+      <v-btn class="mt-2" type="submit" block>{{$t('Submit')}}</v-btn>
       <!-- <v-btn class="mt-2" block>back</v-btn> -->
     </v-form>
   </v-sheet>

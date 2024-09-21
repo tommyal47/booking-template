@@ -5,17 +5,17 @@
             <v-card class="mx-auto" width="400" prepend-icon="" title="Edit User Data">
                 <v-sheet class="mx-auto" width="300">
                     <v-form fast-fail @submit.prevent="updateUser">
-                        <v-text-field v-model="userData.fullName" clearable label="Full name" variant="solo"
+                        <v-text-field v-model="userData.fullName" clearable :label="$t('Name')" variant="solo"
                             :rules="[nameValidation]"></v-text-field>
 
-                        <v-text-field v-model="userData.email" clearable label="Email Address" type="email"
+                        <v-text-field v-model="userData.email" clearable :label="$t('Email')" type="email"
                             placeholder="johndoe@gmail.com" variant="solo" :rules="[emailRules]"></v-text-field>
 
-                        <v-text-field v-model="userData.phoneNumber" clearable label="Phone Number" type="number"
+                        <v-text-field v-model="userData.phoneNumber" clearable :label="$t('Phone')" type="number"
                             variant="solo" :rules="[phoneRules]"></v-text-field>
 
-                        <v-btn class="mt-2" type="submit" block>Submit</v-btn>
-                        <v-btn class="mt-2" @click="$emit('handleEditDialog')" block>cancel</v-btn>
+                        <v-btn class="mt-2" type="submit" block>{{$t('Submit')}}</v-btn>
+                        <v-btn class="mt-2" @click="$emit('handleEditDialog')" block>{{ $t('Cancel') }}</v-btn>
                     </v-form>
                 </v-sheet>
                 <!-- <template v-slot:actions>
@@ -44,8 +44,9 @@ const props = defineProps({
         required: true
     }
 })
-const userData= JSON.parse(JSON.stringify(props.user));
+const userData = JSON.parse(JSON.stringify(props.user));
 // console.log('user', props.user);
+
 
 const emailRules = computed(() => {
     if (props.user.email) return true
@@ -74,7 +75,7 @@ const updateUser = () => {
 
 }
 
-console.log(props.user);
+// console.log(props.user);
 
 
 

@@ -4,9 +4,9 @@ import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 // import 'vuetify/styles'
 // import { createVuetify } from 'vuetify'
-// import { createI18n } from 'vue-i18n';
-// import en from './locales/en.json';
-// import ar from './locales/ar.json';
+import { createI18n } from 'vue-i18n';
+import en from './locales/en.json';
+import ar from './locales/ar.json';
 import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
@@ -28,18 +28,18 @@ const vuetify = createVuetify({
     },
   })
 
-  // const i18n = createI18n({
-  //   locale: 'en', // default language
-  //   fallbackLocale: 'en', // fallback if the key is missing
-  //   messages: {
-  //     en, // English translations
-  //     ar, // French translations
-  //   },
-  // });
+  const i18n = createI18n({
+    locale: 'en', // default language
+    fallbackLocale: 'en', // fallback if the key is missing
+    messages: {
+      en, // English translations
+      ar, // French translations
+    },
+  });
 
 app.use(createPinia())
 app.use(router)
 app.use(vuetify)
-// app.use(i18n)
+app.use(i18n)
 app.mount('#app')
 

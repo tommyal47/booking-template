@@ -4,10 +4,10 @@
             <v-navigation-drawer expand-on-hover rail>
                 <v-divider></v-divider>
                 <v-list density="compact" nav class="mt-16">
-                    <v-list-item color="primary" rounded="shaped" prepend-icon="mdi-home" title="Home" value="Home"
+                    <v-list-item color="primary" rounded="shaped" prepend-icon="mdi-home" :title="$t('Home')" value="Home"
                         @click="goToHome" :active="isActive('/')">
                     </v-list-item>
-                    <v-list-item color="primary" rounded="shaped" prepend-icon="mdi-account-multiple" title="Users"
+                    <v-list-item color="primary" rounded="shaped" prepend-icon="mdi-account-multiple" :title="$t('Users')"
                         value="Users" @click="goToUseres" :active="isActive('/users')">
                     </v-list-item>
                 </v-list>
