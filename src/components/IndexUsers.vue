@@ -87,12 +87,12 @@ const handleDeleteUSer = (id) => {
         buttonsStyling: true
     });
     swalWithBootstrapButtons.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
+        title: t('DeleteQuestion'),
+        text: t('DeleteDescription'),
         icon: "warning",
         showCancelButton: true,
-        confirmButtonText: "Yes, delete it!",
-        cancelButtonText: "No, cancel!",
+        confirmButtonText: t('DeleteConfirm'),
+        cancelButtonText: t('DeleteCancel'),
         reverseButtons: true,
         // customClass: {
         //     // confirmButton: 'swal-confirm-button', // Add a custom class to the confirm button
@@ -102,8 +102,8 @@ const handleDeleteUSer = (id) => {
         if (result.isConfirmed) {
             userStore.deleteUser(id)
             swalWithBootstrapButtons.fire({
-                title: "Deleted!",
-                text: "User has been deleted successfully.",
+                title: t('ConfirmTitle'),
+                text: t('ConfirmBody'),
                 icon: "success"
             });
         } else if (
@@ -111,8 +111,8 @@ const handleDeleteUSer = (id) => {
             result.dismiss === Swal.DismissReason.cancel
         ) {
             swalWithBootstrapButtons.fire({
-                title: "Cancelled",
-                text: "Delete has been cancelled",
+                title: t('CancelledTitle'),
+                text: t('CancelBody'),
                 icon: "error"
             });
         }

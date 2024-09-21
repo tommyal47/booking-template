@@ -12,6 +12,15 @@
     "Cancel": "إلغاء",
     "Close": "إغلق",
     "ApplicationName": "إسم التطبيق",
-    "itemsPerPage": "عدد العناصر في الصفحة"
+    "itemsPerPage": "عدد العناصر في الصفحة",
+    "DeleteQuestion": "هل أنت متأكد؟",
+    "DeleteDescription": "!لن تكون قادراً على التراجع عن هذا",
+    "DeleteConfirm": "!نعم، احذفه",
+    "DeleteCancel": "!لا، الغِ الأمر",
+    "CancelledTitle": "تم الإلغاء",
+    "CancelBody": "تم إلغاء الحذف",
+    "ConfirmTitle": "!تم الحذف",
+    "ConfirmBody": ".تم حذف المستخدم بنجاح",
+    "Ok": "حسنا"
 
 }

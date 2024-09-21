@@ -12,6 +12,15 @@
     "Cancel": "Cancel",
     "Close": "Close",
     "ApplicationName": "Application Name",
-    "itemsPerPage": "items per page"
+    "itemsPerPage": "items per page",
+    "DeleteQuestion": "Are you sure?",
+    "DeleteDescription": "You won't be able to revert this!",
+    "DeleteConfirm": "Yes, delete it!",
+    "DeleteCancel": "No, cancel!",
+    "CancelledTitle": "Cancelled",
+    "CancelBody": "Delete has been cancelled",
+    "ConfirmTitle": "Deleted!",
+    "ConfirmBody": "User has been deleted successfully.",
+    "Ok": "OK"
 
 }

@@ -20,10 +20,6 @@ const handleLogout = () => {
 
 const changeLanguage = () => {
     locale.value = locale.value === 'en' ? 'ar' : 'en';
-    console.log(locale.value);
-
-    console.log('change language');
-
 }
 
 </script>
