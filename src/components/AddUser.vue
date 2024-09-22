@@ -22,6 +22,9 @@
 import { ref, computed } from 'vue';
 import { useUserStore } from '@/stores/storeUser';
 import { useRouter } from 'vue-router';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n()
 const router = useRouter()
 
 const storeUser = useUserStore()
@@ -31,20 +34,20 @@ const user = ref({})
 const emailRules = computed(() => {
   if (user.value.emailAddress) return true
 
-  return 'Email is required'
+  return t('errors.email')
 }
 )
 const nameValidation = computed(() => {
   if (user.value.fullName?.length >= 3) return true
 
-  return 'Full name must be at least 3 characters.'
+  return t('errors.fullname')
 })
 
 
 const phoneRules = computed(() => {
   if (user.value.phoneNumber?.length === 11) return true
 
-  return 'Phone number must be 11 degits'
+  return t('errors.phonenumber')
 }
 );
 

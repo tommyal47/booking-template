@@ -1,26 +1,31 @@
 <template>
+    <NavBar />
     <v-sheet class="mx-auto" width="300">
         <v-form @submit.prevent="logIn">
-            <v-text-field v-model="admin.userName" :rules="[nameRules]" label="User name"
+            <v-text-field v-model="admin.userName" :rules="[nameRules]" :label="$t('UserNAme')"
                 variant="solo"></v-text-field>
-            <v-text-field autocomplete v-model="admin.userPassword" :rules="[passwordRules]" label="Password"
+            <v-text-field autocomplete v-model="admin.userPassword" :rules="[passwordRules]" :label="$t('Password')"
                 type="password" variant="solo"></v-text-field>
 
-            <v-btn class="mt-2" text="Submit" type="submit" block></v-btn>
+            <v-btn class="mt-2" :text="$t('Login')" type="submit" block></v-btn>
         </v-form>
     </v-sheet>
-    <div>
+    <!-- <div>
         <v-alert class="alert-error" color="red" type="error" density="compact" icon="mdi-firework" theme="dark"
             v-model="active">
-            Invalid username or password
+            {{ $t('errors.login') }}
         </v-alert>
-    </div>
+    </div> -->
 </template>
 
 
 <script setup>
 
 import { ref, computed } from 'vue'
+import NavBar from '@/layouts/components/NavBar.vue';
+import { useI18n } from 'vue-i18n';
+import Swal from 'sweetalert2';
+const { t } = useI18n()
 
 const admin = ref({})
 const active = ref(false)
@@ -33,25 +38,51 @@ const data = {
 const nameRules = computed(() => {
     if (admin.value.userName) return true
 
-    return 'User name is required'
+    return t('errors.username')
 })
 
 const passwordRules = computed(() => {
     if (admin.value.userPassword) return true
 
-    return 'Password is required'
+    return t('errors.password')
 })
+
+
+const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+    }
+});
+
 
 const logIn = () => {
     if (admin.value.userName && admin.value.userPassword) {
         if (admin.value.userName === data.user_name && admin.value.userPassword === data.user_password) {
-            localStorage.setItem('auth', true)
-            window.location.href = '/users'
+            Toast.fire({
+                icon: "success",
+                title: t('SuccessLogin')
+            });
+            setTimeout(() => {
+                localStorage.setItem('auth', true)
+                window.location.href = '/users'
+            }, 1000)
+            // localStorage.setItem('auth', true)
+            // window.location.href = '/users'
         } else {
             active.value = true
-            setTimeout(() => {
-                active.value = false
-            }, 3000)
+            Toast.fire({
+                icon: "error",
+                title: t('errors.login')
+            });
+            // setTimeout(() => {
+            //     active.value = false
+            // }, 3000)
         }
     }
 }

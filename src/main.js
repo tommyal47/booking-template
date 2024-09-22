@@ -27,9 +27,9 @@ const vuetify = createVuetify({
 
     },
   })
-
+  const storedLanguage = localStorage.getItem('lang') || 'en';
   const i18n = createI18n({
-    locale: 'en', // default language
+    locale: storedLanguage, // default language
     fallbackLocale: 'en', // fallback if the key is missing
     messages: {
       en, // English translations

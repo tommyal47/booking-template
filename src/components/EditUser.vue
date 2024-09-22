@@ -31,6 +31,10 @@
 
 import { ref, defineEmits, defineProps, computed } from 'vue';
 import { useUserStore } from '@/stores/storeUser';
+import { useI18n } from 'vue-i18n';
+
+
+const { t } = useI18n();
 
 const userStore = useUserStore();
 
@@ -51,20 +55,20 @@ const userData = JSON.parse(JSON.stringify(props.user));
 const emailRules = computed(() => {
     if (props.user.email) return true
 
-    return 'Email is required'
+    return t('errors.email')
 }
 )
 const nameValidation = computed(() => {
     if (props.user.fullName?.length >= 3) return true
 
-    return 'Full name must be at least 3 characters.'
+    return t('errors.fullname')
 })
 
 
 const phoneRules = computed(() => {
     if (props.user.phoneNumber?.length === 11) return true
 
-    return 'Phone number must be 11 degits'
+    return t('errors.phonenumber')
 }
 );
 const updateUser = () => {

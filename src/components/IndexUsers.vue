@@ -104,7 +104,8 @@ const handleDeleteUSer = (id) => {
             swalWithBootstrapButtons.fire({
                 title: t('ConfirmTitle'),
                 text: t('ConfirmBody'),
-                icon: "success"
+                icon: "success",
+                confirmButtonText: t('Ok')
             });
         } else if (
             /* Read more about handling dismissals below */
@@ -113,7 +114,8 @@ const handleDeleteUSer = (id) => {
             swalWithBootstrapButtons.fire({
                 title: t('CancelledTitle'),
                 text: t('CancelBody'),
-                icon: "error"
+                icon: "error",
+                confirmButtonText: t('Ok')
             });
         }
     });
