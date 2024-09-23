@@ -26,6 +26,13 @@
     "Password": "Password",
     "Login": "Login",
     "SuccessLogin": "Signed in successfully",
+    "RolesLable": "Roles",
+    "Roles": {
+        "id": "id",
+        "en_name": "english name",
+        "ar_name": "arabic name",
+        "addrole": "add role"
+    },
     "errors": {
         "username": "User name is required",
         "password": "Password is required",

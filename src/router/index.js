@@ -3,6 +3,7 @@ import Home from '@/views/HomePage.vue'
 import Adduser from '@/views/AddUser.vue'
 import Users from '@/views/UsersIndex.vue'
 import LogIn from '@/views/LogIn.vue'
+import RolesIndex from '@/views/roles/RolesIndex.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -26,6 +27,11 @@ const router = createRouter({
       path: '/login',
       name: 'login',
       component: LogIn
+    },
+    {
+      path: '/roles',
+      name: 'roles',
+      component: RolesIndex
     },
     // {
     //   // path: '/about',
