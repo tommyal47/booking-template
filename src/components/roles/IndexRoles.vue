@@ -1,5 +1,5 @@
 <template>
-    <v-btn class="add-btn" >{{ $t('Roles.addrole') }}</v-btn>
+    <v-btn class="add-btn" >{{ $t('AddRole') }}</v-btn>
     <v-data-table :headers="headers" :items="storeRole.roles" density="compact" item-key="name">
         <template v-slot:[`item.actions`]="{ item }">
             <div class="d-flex justify-space-around flex-wrap pa-2 ml-30">
@@ -24,9 +24,9 @@ const storeRole = useRoleStore()
 const { t } = useI18n(); // Access the translation function
 
 const headers = computed(() => [
-    { title: t('Roles.id'), align: 'center', key: 'id' },
-    { title: t('Roles.en_name'), align: 'center', key: 'en_name' },
-    { title: t('Roles.ar_name'), align: 'center', key: 'ar_name' },
+    { title: t('ID'), align: 'center', key: 'id' },
+    { title: t('En_Name'), align: 'center', key: 'en_name' },
+    { title: t('Ar_Name'), align: 'center', key: 'ar_name' },
     { title: t('Actions'), align: 'center', key: 'actions' }
 ])
 
