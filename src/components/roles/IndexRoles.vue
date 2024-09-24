@@ -11,13 +11,16 @@
             </div>
         </template>
     </v-data-table>
-
+    <div v-if="openShowDialog">
+        <ShowRole :role="role" @handleCloseDialog="handleCloseDialog" />
+    </div>
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed,ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRoleStore } from '@/stores/storeRole';
+import ShowRole from './ShowRole.vue';
 
 const storeRole = useRoleStore()
 
@@ -29,5 +32,14 @@ const headers = computed(() => [
     { title: t('Ar_Name'), align: 'center', key: 'ar_name' },
     { title: t('Actions'), align: 'center', key: 'actions' }
 ])
+const openShowDialog = ref(false)
+const role = ref(null)
+const showUser = (item) => {
+    openShowDialog.value = true
+    role.value = item
+}
 
+const handleCloseDialog = () => {
+    openShowDialog.value = false
+}
 </script>
