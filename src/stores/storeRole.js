@@ -12,9 +12,10 @@ export const useRoleStore = defineStore('storeRole', {
             ]
         }
     },
-    actions: () => {
-        deleteRole(id){
-            this.roles = this.roles.filter(role => role.id !== id)
-          }
-    }
+    actions: {
+        deleteRole (id) {
+            this.roles = this.roles.filter(role => role.id!== id)
+  
+        }
+    },
 })

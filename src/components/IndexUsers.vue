@@ -103,7 +103,7 @@ const handleDeleteUSer = (id) => {
             userStore.deleteUser(id)
             swalWithBootstrapButtons.fire({
                 title: t('ConfirmTitle'),
-                text: t('ConfirmBody'),
+                text: t('ConfirmBodyUser'),
                 icon: "success",
                 confirmButtonText: t('Ok')
             });

@@ -6,7 +6,7 @@
                 <v-btn class="ma-2" @click="showUser(item)" color="green-lighten-1" size="33px" icon="mdi-eye"></v-btn>
                 <v-btn class="ma-2" @click="editUser(item)" color="green-lighten-1" size="33px"
                     icon="mdi-pencil"></v-btn>
-                <v-btn class="ma-2" @click="handleDeleteUSer(item.id)" color="orange-lighten-1" size="33px"
+                <v-btn class="ma-2" @click="handleDeleteRole(item.id)" color="orange-lighten-1" size="33px"
                     icon="mdi-delete"></v-btn>
             </div>
         </template>
@@ -46,7 +46,7 @@ const handleCloseDialog = () => {
 
 
 
-const handleDeleteUSer = () => {
+const handleDeleteRole = (id) => {
     const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
             confirmButton: "btn btn-success text-white",
@@ -68,10 +68,10 @@ const handleDeleteUSer = () => {
         // },
     }).then((result) => {
         if (result.isConfirmed) {
-            //userStore.deleteUser(id)
+            storeRole.deleteRole(id)
             swalWithBootstrapButtons.fire({
                 title: t('ConfirmTitle'),
-                text: t('ConfirmBody'),
+                text: t('ConfirmBodyRole'),
                 icon: "success",
                 confirmButtonText: t('Ok')
             });

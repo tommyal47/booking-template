@@ -34,7 +34,7 @@ export const useUserStore = defineStore('storeUser', {
       this.users[index].phoneNumber = user.phoneNumber
     },
 
-    deleteUser(id){
+    deleteUser(id) {
       this.users = this.users.filter(user => user.id !== id)
     }
   },
