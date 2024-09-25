@@ -1,5 +1,5 @@
 <template>
-    <v-btn class="add-btn" >{{ $t('AddRole') }}</v-btn>
+    <v-btn class="add-btn">{{ $t('AddRole') }}</v-btn>
     <v-data-table :headers="headers" :items="storeRole.roles" density="compact" item-key="name">
         <template v-slot:[`item.actions`]="{ item }">
             <div class="d-flex justify-space-around flex-wrap pa-2 ml-30">
@@ -17,10 +17,11 @@
 </template>
 
 <script setup>
-import { computed,ref } from 'vue';
+import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRoleStore } from '@/stores/storeRole';
 import ShowRole from './ShowRole.vue';
+import Swal from 'sweetalert2';
 
 const storeRole = useRoleStore()
 
@@ -42,4 +43,51 @@ const showUser = (item) => {
 const handleCloseDialog = () => {
     openShowDialog.value = false
 }
+
+
+
+const handleDeleteUSer = () => {
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: "btn btn-success text-white",
+            cancelButton: "btn btn-danger text-white"
+        },
+        buttonsStyling: true
+    });
+    swalWithBootstrapButtons.fire({
+        title: t('DeleteQuestion'),
+        text: t('DeleteDescription'),
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: t('DeleteConfirm'),
+        cancelButtonText: t('DeleteCancel'),
+        reverseButtons: true,
+        // customClass: {
+        //     // confirmButton: 'swal-confirm-button', // Add a custom class to the confirm button
+        //     // cancelButton: 'swal-cancel-button',   // Optional: add a class to the cancel button if needed
+        // },
+    }).then((result) => {
+        if (result.isConfirmed) {
+            //userStore.deleteUser(id)
+            swalWithBootstrapButtons.fire({
+                title: t('ConfirmTitle'),
+                text: t('ConfirmBody'),
+                icon: "success",
+                confirmButtonText: t('Ok')
+            });
+        } else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === Swal.DismissReason.cancel
+        ) {
+            swalWithBootstrapButtons.fire({
+                title: t('CancelledTitle'),
+                text: t('CancelBody'),
+                icon: "error",
+                confirmButtonText: t('Ok')
+            });
+        }
+    });
+}
+
+
 </script>
