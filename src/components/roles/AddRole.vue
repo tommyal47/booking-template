@@ -3,7 +3,7 @@
         <v-dialog v-model="dialog" persistent>
             <v-card class="mx-auto" width="400" prepend-icon="" title="Add Role">
                 <v-sheet class="mx-auto" width="300">
-                    <v-form fast-fail @submit.prevent>
+                    <v-form fast-fail @submit.prevent="addRole">
                         <v-text-field v-model="role.en_name" clearable :rules="[EnRules]" :label="$t('En_Name')"
                             variant="solo"></v-text-field>
 
@@ -23,9 +23,10 @@
 <script setup>
 
 import { ref, defineEmits, computed } from 'vue';
-
+import { useRoleStore } from '@/stores/storeRole';
 import { useI18n } from 'vue-i18n';
 
+const storeRole = useRoleStore()
 const role = ref({})
 const { t } = useI18n();
 
@@ -33,16 +34,36 @@ const { t } = useI18n();
 
 const dialog = ref(true);
 
-// eslint-disable-next-line no-unused-vars
-const emit = defineEmits(['handleAddDialog'])
+const addRole = () => {
+    if (role.value.en_name && role.value.ar_name) {
+        storeRole.addRole(role.value)
+        emit('handleAddDialog')
+    }
+}
 
+const emit = defineEmits(['handleAddDialog'])
+const englishRegex = /^[A-Za-z\s]*$/;
 const EnRules = computed(() => {
-    if (role.value.en_name) return true
+    if (role.value.en_name) {
+        if (englishRegex.test(role.value.en_name)){
+            return true
+        }
+        return t('errors.En_letters')
+    }
 
     return t('errors.En_name')
 })
+const arabicRegex = /^[\u0600-\u06FF\s]*$/;
 const ArRules = computed(() => {
-    if (role.value.ar_name) return true
+    if (role.value.ar_name) {
+        if (arabicRegex.test(role.value.ar_name)) {
+            console.log(arabicRegex.test(role.value.ar_name));
+
+            return true
+        }
+        console.log(arabicRegex.test(role.value.ar_name));
+        return t('errors.Ar_letters')
+    }
 
     return t('errors.Ar_name')
 })
