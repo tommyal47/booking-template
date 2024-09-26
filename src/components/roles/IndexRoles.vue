@@ -1,5 +1,5 @@
 <template>
-    <v-btn class="add-btn">{{ $t('AddRole') }}</v-btn>
+    <v-btn class="add-btn" @click="handleAddRole">{{ $t('AddRole') }}</v-btn>
     <v-data-table :headers="headers" :items="storeRole.roles" density="compact" item-key="name">
         <template v-slot:[`item.actions`]="{ item }">
             <div class="d-flex justify-space-around flex-wrap pa-2 ml-30">
@@ -14,6 +14,9 @@
     <div v-if="openShowDialog">
         <ShowRole :role="role" @handleCloseDialog="handleCloseDialog" />
     </div>
+    <div v-if="openAddDialog">
+        <AddRole :role="role" @handleAddDialog="handleAddDialog" />
+    </div>
 </template>
 
 <script setup>
@@ -21,6 +24,7 @@ import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRoleStore } from '@/stores/storeRole';
 import ShowRole from './ShowRole.vue';
+import AddRole from './AddRole.vue';
 import Swal from 'sweetalert2';
 
 const storeRole = useRoleStore()
@@ -34,6 +38,7 @@ const headers = computed(() => [
     { title: t('Actions'), align: 'center', key: 'actions' }
 ])
 const openShowDialog = ref(false)
+const openAddDialog = ref(false)
 const role = ref(null)
 const showUser = (item) => {
     openShowDialog.value = true
@@ -44,6 +49,13 @@ const handleCloseDialog = () => {
     openShowDialog.value = false
 }
 
+const handleAddDialog = () => {
+    openAddDialog.value = false
+}
+
+const handleAddRole = () => {
+    openAddDialog.value = true
+}
 
 
 const handleDeleteRole = (id) => {
