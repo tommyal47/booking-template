@@ -4,7 +4,7 @@
         <template v-slot:[`item.actions`]="{ item }">
             <div class="d-flex justify-space-around flex-wrap pa-2 ml-30">
                 <v-btn class="ma-2" @click="showUser(item)" color="green-lighten-1" size="33px" icon="mdi-eye"></v-btn>
-                <v-btn class="ma-2" @click="editUser(item)" color="green-lighten-1" size="33px"
+                <v-btn class="ma-2" @click="editRole(item)" color="green-lighten-1" size="33px"
                     icon="mdi-pencil"></v-btn>
                 <v-btn class="ma-2" @click="handleDeleteRole(item.id)" color="orange-lighten-1" size="33px"
                     icon="mdi-delete"></v-btn>
@@ -17,6 +17,9 @@
     <div v-if="openAddDialog">
         <AddRole :role="role" @handleAddDialog="handleAddDialog" />
     </div>
+    <div v-if="openEditDialog">
+        <EditRole :role="role" @handleEditDialog="handleEditDialog" />
+    </div>
 </template>
 
 <script setup>
@@ -25,6 +28,7 @@ import { useI18n } from 'vue-i18n';
 import { useRoleStore } from '@/stores/storeRole';
 import ShowRole from './ShowRole.vue';
 import AddRole from './AddRole.vue';
+import EditRole from './EditRole.vue';
 import Swal from 'sweetalert2';
 
 const storeRole = useRoleStore()
@@ -39,9 +43,14 @@ const headers = computed(() => [
 ])
 const openShowDialog = ref(false)
 const openAddDialog = ref(false)
+const openEditDialog = ref(false)
 const role = ref(null)
 const showUser = (item) => {
     openShowDialog.value = true
+    role.value = item
+}
+const editRole = (item) => {
+    openEditDialog.value = true
     role.value = item
 }
 
@@ -51,6 +60,9 @@ const handleCloseDialog = () => {
 
 const handleAddDialog = () => {
     openAddDialog.value = false
+}
+const handleEditDialog = () => {
+    openEditDialog.value = false
 }
 
 const handleAddRole = () => {

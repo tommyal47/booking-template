@@ -23,6 +23,11 @@ export const useRoleStore = defineStore('storeRole', {
                 this.roles.push(role)
             }
         },
+        editRole (role) {
+            const index = this.roles.findIndex((r) => r.id === role.id)
+            this.roles[index].en_name = role.en_name
+            this.roles[index].ar_name = role.ar_name
+        },
         deleteRole (id) {
             this.roles = this.roles.filter(role => role.id!== id)
   
