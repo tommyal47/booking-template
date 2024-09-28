@@ -4,6 +4,7 @@ import Adduser from '@/views/AddUser.vue'
 import Users from '@/views/UsersIndex.vue'
 import LogIn from '@/views/LogIn.vue'
 import RolesIndex from '@/views/roles/RolesIndex.vue'
+import AdminsIndex from '@/views/SystemAdmins/AdminsIndex.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -32,6 +33,11 @@ const router = createRouter({
       path: '/roles',
       name: 'roles',
       component: RolesIndex
+    },
+    {
+      path: '/admins',
+      name: 'admins',
+      component: AdminsIndex
     },
     // {
     //   // path: '/about',
