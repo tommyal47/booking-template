@@ -1,4 +1,5 @@
 <template>
+    <v-btn class="add-btn" @click="router.push('/add-user')">{{ $t('AddUser') }}</v-btn>
     <v-data-table :headers="headers" :items="storeAdmin.admins" density="compact" item-key="name">
         <template v-slot:[`item.actions`]="{ item }">
             <div class="d-flex justify-space-around flex-wrap pa-2 ml-30">
@@ -18,9 +19,10 @@
 
 import { computed } from 'vue';
 import { useAdminStore } from '@/stores/storeAdmin';
+import { useRouter } from 'vue-router';
 // import handleDeleteUser from './DeleteUser.vue'
 import { useI18n } from 'vue-i18n';
-
+const router = useRouter();
 const storeAdmin = useAdminStore()
 const { t } = useI18n(); // Access the translation function
 
