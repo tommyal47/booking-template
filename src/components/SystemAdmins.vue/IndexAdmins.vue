@@ -3,13 +3,15 @@
     <v-data-table :headers="headers" :items="storeAdmin.admins" density="compact" item-key="name">
         <template v-slot:[`item.actions`]="{ item }">
             <div class="d-flex justify-space-around flex-wrap pa-2 ml-30">
-                <v-btn class="ma-2" color="green-lighten-1" size="33px" icon="mdi-eye"></v-btn>
+                <v-btn class="ma-2" color="green-lighten-1" @click="showAdmin(item)" size="33px" icon="mdi-eye"></v-btn>
                 <v-btn class="ma-2" color="green-lighten-1" size="33px" icon="mdi-pencil"></v-btn>
                 <v-btn class="ma-2" color="orange-lighten-1" size="33px" icon="mdi-delete"></v-btn>
             </div>
         </template>
     </v-data-table>
-
+    <div v-if="openShowDialog">
+        <ShowAdmin :admin="admin"  @handleCloseDialog="handleCloseDialog" />
+    </div>
 
 </template>
 
@@ -17,9 +19,10 @@
 <script setup>
 
 
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { useAdminStore } from '@/stores/storeAdmin';
 import { useRouter } from 'vue-router';
+import ShowAdmin from './ShowAdmin.vue';
 // import handleDeleteUser from './DeleteUser.vue'
 import { useI18n } from 'vue-i18n';
 const router = useRouter();
@@ -36,6 +39,17 @@ const headers = computed(() => [
     { title: t('Role'), align: 'center', key: 'role' },
     { title: t('Actions'), align: 'center', key: 'actions' }
 ])
+
+const openShowDialog = ref(false);
+const admin = ref({})
+const showAdmin = (item) => {
+    openShowDialog.value = true;
+    admin.value = item
+}
+
+const handleCloseDialog = () => {
+    openShowDialog.value = false;
+}
 
 </script>
 
