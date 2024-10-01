@@ -1,5 +1,5 @@
 <template>
-    <v-btn class="add-btn" @click="router.push('/add-user')">{{ $t('AddUser') }}</v-btn>
+    <v-btn class="add-btn" @click="router.push('/add-user')">{{ $t('AddAdmin') }}</v-btn>
     <v-data-table :headers="headers" :items="storeAdmin.admins" density="compact" item-key="name">
         <template v-slot:[`item.actions`]="{ item }">
             <div class="d-flex justify-space-around flex-wrap pa-2 ml-30">

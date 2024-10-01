@@ -13,7 +13,7 @@
                     <v-list-item color="primary" rounded="shaped" prepend-icon="mdi-account-key" :title="$t('RolesLable')"
                         value="Roles" @click="$router.push('/roles')" :active="isActive('/roles')">
                     </v-list-item>
-                    <v-list-item color="primary" rounded="shaped" prepend-icon="mdi-account-key" :title="$t('RolesLable')"
+                    <v-list-item color="primary" rounded="shaped" prepend-icon="mdi-account-key" :title="$t('Admins')"
                         value="Roles" @click="$router.push('/admins')" :active="isActive('/admins')">
                     </v-list-item>
                 </v-list>
