@@ -1,5 +1,5 @@
 <template>
-    <v-btn class="add-btn" @click="router.push('/add-user')">{{ $t('AddAdmin') }}</v-btn>
+    <v-btn class="add-btn" @click="addAdmin">{{ $t('AddAdmin') }}</v-btn>
     <v-data-table :headers="headers" :items="storeAdmin.admins" density="compact" item-key="name">
         <template v-slot:[`item.actions`]="{ item }">
             <div class="d-flex justify-space-around flex-wrap pa-2 ml-30">
@@ -12,6 +12,9 @@
     <div v-if="openShowDialog">
         <ShowAdmin :admin="admin"  @handleCloseDialog="handleCloseDialog" />
     </div>
+    <div v-if="openAddDialog">
+        <AddAdmin  @handleCloseDialog="handleCloseDialog" />
+    </div>
 
 </template>
 
@@ -21,11 +24,11 @@
 
 import { computed, ref } from 'vue';
 import { useAdminStore } from '@/stores/storeAdmin';
-import { useRouter } from 'vue-router';
 import ShowAdmin from './ShowAdmin.vue';
+import AddAdmin from './AddAdmin.vue';
 // import handleDeleteUser from './DeleteUser.vue'
 import { useI18n } from 'vue-i18n';
-const router = useRouter();
+
 const storeAdmin = useAdminStore()
 const { t } = useI18n(); // Access the translation function
 
@@ -41,6 +44,7 @@ const headers = computed(() => [
 ])
 
 const openShowDialog = ref(false);
+const openAddDialog = ref(false);
 const admin = ref({})
 const showAdmin = (item) => {
     openShowDialog.value = true;
@@ -49,6 +53,11 @@ const showAdmin = (item) => {
 
 const handleCloseDialog = () => {
     openShowDialog.value = false;
+    openAddDialog.value = false;
+}
+
+const addAdmin = () => {
+    openAddDialog.value = true
 }
 
 </script>

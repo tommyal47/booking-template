@@ -14,7 +14,7 @@
             </template>
 
             <template v-slot:item.3>
-              <v-card title="Step Three" flat>...</v-card>
+              <v-card title="Step Three" @click="$emit('handleCloseDialog')" flat>...</v-card>
             </template>
           </v-stepper>
         </v-sheet>
@@ -24,7 +24,8 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, defineEmits } from 'vue';
 
 const dialog = ref(true);
+defineEmits('[handleCloseDialog]')
 </script>
