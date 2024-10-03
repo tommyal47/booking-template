@@ -5,15 +5,16 @@
             <div class="d-flex justify-space-around flex-wrap pa-2 ml-30">
                 <v-btn class="ma-2" color="green-lighten-1" @click="showAdmin(item)" size="33px" icon="mdi-eye"></v-btn>
                 <v-btn class="ma-2" color="green-lighten-1" size="33px" icon="mdi-pencil"></v-btn>
-                <v-btn class="ma-2" color="orange-lighten-1" size="33px" icon="mdi-delete"></v-btn>
+                <v-btn class="ma-2" color="orange-lighten-1" @click="handleDeleteAdmin(item.id)" size="33px"
+                    icon="mdi-delete"></v-btn>
             </div>
         </template>
     </v-data-table>
     <div v-if="openShowDialog">
-        <ShowAdmin :admin="admin"  @handleCloseDialog="handleCloseDialog" />
+        <ShowAdmin :admin="admin" @handleCloseDialog="handleCloseDialog" />
     </div>
     <div v-if="openAddDialog">
-        <AddAdmin  @handleCloseDialog="handleCloseDialog" />
+        <AddAdmin @handleCloseDialog="handleCloseDialog" />
     </div>
 
 </template>
@@ -28,6 +29,7 @@ import ShowAdmin from './ShowAdmin.vue';
 import AddAdmin from './AddAdmin.vue';
 // import handleDeleteUser from './DeleteUser.vue'
 import { useI18n } from 'vue-i18n';
+import Swal from 'sweetalert2';
 
 const storeAdmin = useAdminStore()
 const { t } = useI18n(); // Access the translation function
@@ -58,6 +60,45 @@ const handleCloseDialog = () => {
 
 const addAdmin = () => {
     openAddDialog.value = true
+}
+
+const handleDeleteAdmin = (id) => {
+    const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+            confirmButton: "btn btn-success text-white",
+            cancelButton: "btn btn-danger text-white"
+        },
+        buttonsStyling: true
+    });
+    swalWithBootstrapButtons.fire({
+        title: t('DeleteQuestion'),
+        text: t('DeleteDescription'),
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: t('DeleteConfirm'),
+        cancelButtonText: t('DeleteCancel'),
+        reverseButtons: true,
+    }).then((result) => {
+        if (result.isConfirmed) {
+            storeAdmin.deleteAdmin(id);
+            swalWithBootstrapButtons.fire({
+                title: t('ConfirmTitle'),
+                text: t('ConfirmBodyAdmin'),
+                icon: "success",
+                confirmButtonText: t('Ok')
+            });
+        } else if (
+            /* Read more about handling dismissals below */
+            result.dismiss === Swal.DismissReason.cancel
+        ) {
+            swalWithBootstrapButtons.fire({
+                title: t('CancelledTitle'),
+                text: t('CancelBody'),
+                icon: "error",
+                confirmButtonText: t('Ok')
+            });
+        }
+    });
 }
 
 </script>

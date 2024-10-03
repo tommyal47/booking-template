@@ -13,5 +13,10 @@ export const useAdminStore = defineStore('storeAdmin',{
                 }
             ],
         }
+    },
+    actions: {
+        deleteAdmin(id) {
+            this.admins = this.admins.filter(admin => admin.id !== id);
+        }
     }
 })

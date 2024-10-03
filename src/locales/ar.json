@@ -22,6 +22,7 @@
     "ConfirmTitle": "!تم الحذف",
     "ConfirmBodyUser": ".تم حذف المستخدم بنجاح",
     "ConfirmBodyRole": ".تم حذف الدور بنجاح",
+    "ConfirmBodyAdmin": ".تم حذف الادمن بنجاح",
     "Ok": "حسنا",
     "UserNAme": "إسم المستخدم",
     "Password": "كلمة السر",

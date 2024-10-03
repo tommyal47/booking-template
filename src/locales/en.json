@@ -22,6 +22,7 @@
     "ConfirmTitle": "Deleted!",
     "ConfirmBodyUser": "User has been deleted successfully.",
     "ConfirmBodyRole": "Role has been deleted successfully",
+    "ConfirmBodyAdmin": "Admin has been deleted successfully",
     "Ok": "OK",
     "UserNAme": "User name",
     "Password": "Password",
