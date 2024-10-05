@@ -24,6 +24,7 @@
                 <v-text-field clearable label="password" variant="solo"></v-text-field>
                 <v-text-field clearable label="confirm password" variant="solo"></v-text-field>
               </v-card>
+              <v-stepper-actions ></v-stepper-actions>
             </template>
           </v-stepper>
         </v-sheet>
