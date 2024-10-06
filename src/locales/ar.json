@@ -26,6 +26,7 @@
     "Ok": "حسنا",
     "UserNAme": "إسم المستخدم",
     "Password": "كلمة السر",
+    "ConfirmPassword": "تأكيد كلمة السر",
     "Login": "تسجيل دخول",
     "SuccessLogin": "تم تسجيل الدخول بنجاح",
     "RolesLable": "الأدوار",

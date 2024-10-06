@@ -26,6 +26,7 @@
     "Ok": "OK",
     "UserNAme": "User name",
     "Password": "Password",
+    "ConfirmPassword": "Confirm Password",
     "Login": "Login",
     "SuccessLogin": "Signed in successfully",
     "RolesLable": "Roles",

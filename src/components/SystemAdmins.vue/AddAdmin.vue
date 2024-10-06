@@ -59,16 +59,16 @@ const items = ref(['Admin info', 'Role', 'Password'])
           </v-stepper-header>
           <v-stepper-window>
             <v-stepper-window-item step="1" value="1">
-              <v-text-field clearable label="full name" variant="solo"></v-text-field>
-              <v-text-field clearable label="email" variant="solo"></v-text-field>
-              <v-text-field clearable label="phone" variant="solo"></v-text-field>
+              <v-text-field clearable v-model="admin.fullName" :label="$t('Name')" variant="solo" :rules="[nameRules]"></v-text-field>
+              <v-text-field clearable v-model="admin.email" :label="$t('Email')" variant="solo" :rules="[emailRules]"></v-text-field>
+              <v-text-field clearable v-model="admin.phoneNumber" :label="$t('Phone')" variant="solo" :rules="[phoneRules]"></v-text-field>
             </v-stepper-window-item>
             <v-stepper-window-item step="2" value="2">
-              <v-text-field clearable label="role" variant="solo"></v-text-field>
+              <v-text-field clearable v-model="admin.role" :label="$t('Role')" variant="solo" :rules="[roleRules]"></v-text-field>
             </v-stepper-window-item>
             <v-stepper-window-item step="3" value="3">
-              <v-text-field clearable label="password" variant="solo"></v-text-field>
-              <v-text-field clearable label="confirm password" variant="solo"></v-text-field>
+              <v-text-field clearable :label="$t('Password')" variant="solo"></v-text-field>
+              <v-text-field clearable :label="$t('ConfirmPassword')" variant="solo"></v-text-field>
             </v-stepper-window-item>
           </v-stepper-window>
           <v-stepper-actions :disabled="disabled" :next-text="N" @click:next="next"
@@ -82,10 +82,34 @@ const items = ref(['Admin info', 'Role', 'Password'])
 
 <script setup>
 import { ref, computed } from 'vue';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 const step = ref(0)
 const N = ref("next")
+const admin = ref({})
 const disabled = computed(() => step.value === 0 ? 'prev' : false)
+const nameRules = computed(() => {
+  if (admin.value.fullName?.length >= 3) return true
+
+  return t('errors.fullname')
+})
+const phoneRules = computed(() => {
+  if (admin.value.phoneNumber?.length === 11) return true
+
+  return t('errors.phonenumber')
+});
+const emailRules = computed(() => {
+  if (admin.value.email) return true
+
+  return t('errors.email')
+})
+const roleRules = computed(() => {
+  if (admin.value.role) return true
+
+  return t('errors.role')
+})
 
 const next = () => {
   if (step.value < 3) {
