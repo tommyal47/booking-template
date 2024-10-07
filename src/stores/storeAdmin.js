@@ -15,6 +15,18 @@ export const useAdminStore = defineStore('storeAdmin',{
         }
     },
     actions: {
+        addAdmin(admin) {
+            admin = {
+                id: Date.now(),
+                fullName: admin.fullName,
+                email: admin.email,
+                phoneNumber: admin.phoneNumber,
+                role: admin.role
+            }
+            if (admin){
+                this.admins.push(admin)
+            }
+        },
         deleteAdmin(id) {
             this.admins = this.admins.filter(admin => admin.id !== id);
         }

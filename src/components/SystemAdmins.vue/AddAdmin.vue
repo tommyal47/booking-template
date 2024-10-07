@@ -59,16 +59,22 @@ const items = ref(['Admin info', 'Role', 'Password'])
           </v-stepper-header>
           <v-stepper-window>
             <v-stepper-window-item step="1" value="1">
-              <v-text-field clearable v-model="admin.fullName" :label="$t('Name')" variant="solo" :rules="[nameRules]"></v-text-field>
-              <v-text-field clearable v-model="admin.email" :label="$t('Email')" variant="solo" :rules="[emailRules]"></v-text-field>
-              <v-text-field clearable v-model="admin.phoneNumber" :label="$t('Phone')" variant="solo" :rules="[phoneRules]"></v-text-field>
+              <v-text-field clearable v-model="admin.fullName" :label="$t('Name')" variant="solo"
+                :rules="[nameRules]"></v-text-field>
+              <v-text-field clearable v-model="admin.email" :label="$t('Email')" variant="solo"
+                :rules="[emailRules]"></v-text-field>
+              <v-text-field clearable v-model="admin.phoneNumber" :label="$t('Phone')" variant="solo"
+                :rules="[phoneRules]"></v-text-field>
             </v-stepper-window-item>
             <v-stepper-window-item step="2" value="2">
-              <v-text-field clearable v-model="admin.role" :label="$t('Role')" variant="solo" :rules="[roleRules]"></v-text-field>
+              <v-text-field clearable v-model="admin.role" :label="$t('Role')" variant="solo"
+                :rules="[roleRules]"></v-text-field>
             </v-stepper-window-item>
             <v-stepper-window-item step="3" value="3">
-              <v-text-field clearable :label="$t('Password')" variant="solo"></v-text-field>
-              <v-text-field clearable :label="$t('ConfirmPassword')" variant="solo"></v-text-field>
+              <v-text-field clearable v-model="admin.password" type="password" :label="$t('Password')"
+                variant="solo"></v-text-field>
+              <v-text-field clearable v-model="confirmPassword" type="password" :label="$t('ConfirmPassword')"
+                variant="solo"></v-text-field>
             </v-stepper-window-item>
           </v-stepper-window>
           <v-stepper-actions :disabled="disabled" :next-text="N" @click:next="next"
@@ -81,14 +87,18 @@ const items = ref(['Admin info', 'Role', 'Password'])
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, defineEmits } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { useAdminStore } from '@/stores/storeAdmin';
+
+const storeAdmin = useAdminStore()
 
 const { t } = useI18n();
-
+const emit = defineEmits(['handleCloseDialog']);
 const step = ref(0)
 const N = ref("next")
 const admin = ref({})
+const confirmPassword = ref()
 const disabled = computed(() => step.value === 0 ? 'prev' : false)
 const nameRules = computed(() => {
   if (admin.value.fullName?.length >= 3) return true
@@ -113,10 +123,32 @@ const roleRules = computed(() => {
 
 const next = () => {
   if (step.value < 3) {
-    console.log("bafore", step.value);
-    step.value++;
+    if (step.value === 0) {
+      if (admin.value.fullName?.length >= 3 && admin.value.email && admin.value.phoneNumber) {
+        step.value++;
+        console.log('admin info');
+      }
+    }
+    if (step.value === 1) {
+      if (admin.value.role) {
+        step.value++;
+        console.log('role info');
+      }
+    }
+    // console.log("bafore", step.value);
+
+    // console.log("after", step.value);
     if (step.value === 2) {
       N.value = "Submit"
+      if (admin.value.password) {
+        if (admin.value.password === confirmPassword.value) {
+          console.log('password info');
+          storeAdmin.addAdmin(admin.value)
+          emit('handleCloseDialog')
+        } else {
+          console.log('password not match');
+        }
+      }
     }
   }
 }
