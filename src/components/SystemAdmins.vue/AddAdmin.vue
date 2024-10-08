@@ -63,7 +63,7 @@ const items = ref(['Admin info', 'Role', 'Password'])
                 :rules="[nameRules]"></v-text-field>
               <v-text-field clearable v-model="admin.email" :label="$t('Email')" variant="solo"
                 :rules="[emailRules]"></v-text-field>
-              <v-text-field clearable v-model="admin.phoneNumber" :label="$t('Phone')" variant="solo"
+              <v-text-field clearable type="number" v-model="admin.phoneNumber" :label="$t('Phone')" variant="solo"
                 :rules="[phoneRules]"></v-text-field>
             </v-stepper-window-item>
             <v-stepper-window-item step="2" value="2">
@@ -90,7 +90,7 @@ const items = ref(['Admin info', 'Role', 'Password'])
 import { ref, computed, defineEmits } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useAdminStore } from '@/stores/storeAdmin';
-
+import Swal from 'sweetalert2';
 const storeAdmin = useAdminStore()
 
 const { t } = useI18n();
@@ -121,18 +121,40 @@ const roleRules = computed(() => {
   return t('errors.role')
 })
 
+const Toast = Swal.mixin({
+  toast: true,
+  position: "top-end",
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.onmouseenter = Swal.stopTimer;
+    toast.onmouseleave = Swal.resumeTimer;
+  }
+});
 const next = () => {
   if (step.value < 3) {
     if (step.value === 0) {
-      if (admin.value.fullName?.length >= 3 && admin.value.email && admin.value.phoneNumber) {
+      if (admin.value.fullName?.length >= 3 && admin.value.email && admin.value.phoneNumber?.length === 11) {
         step.value++;
         console.log('admin info');
+      } if (!admin.value.fullName?.length >= 3 || !admin.value.email || !admin.value.phoneNumber) {
+        console.log("else info");
+        Toast.fire({
+          icon: "error",
+          title: "fill the required fields"
+        });
       }
     }
     if (step.value === 1) {
       if (admin.value.role) {
         step.value++;
         console.log('role info');
+      } else {
+        Toast.fire({
+          icon: "error",
+          title: "fill the required fields"
+        });
       }
     }
     // console.log("bafore", step.value);
@@ -144,10 +166,23 @@ const next = () => {
         if (admin.value.password === confirmPassword.value) {
           console.log('password info');
           storeAdmin.addAdmin(admin.value)
+          Toast.fire({
+            icon: "success",
+            title: "admin added successfully"
+          });
           emit('handleCloseDialog')
         } else {
+          Toast.fire({
+            icon: "error",
+            title: "password not match"
+          });
           console.log('password not match');
         }
+      } else {
+        Toast.fire({
+          icon: "error",
+          title: "fill the required fields"
+        });
       }
     }
   }
