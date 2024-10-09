@@ -39,6 +39,8 @@
     "errors": {
         "username": "User name is required",
         "password": "Password is required",
+        "passwordlength": "Password must be at least 8 characters",
+        "passwordconfirm": "password doesn't match",
         "login": "Invalid username or password",
         "email": "Email is required",
         "fullname": "Full name must be at least 3 characters.",
@@ -46,7 +48,8 @@
         "En_name" : "English name is required",
         "Ar_name" : "Arabic name is required",
         "En_letters": "'Please enter English letters only.",
-        "Ar_letters": "'Please enter Arabic letters only."
+        "Ar_letters": "'Please enter Arabic letters only.",
+        "role": "Role field is required"
     }
 
 }

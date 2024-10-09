@@ -57,11 +57,9 @@ const arabicRegex = /^[\u0600-\u06FF\s]*$/;
 const ArRules = computed(() => {
     if (role.value.ar_name) {
         if (arabicRegex.test(role.value.ar_name)) {
-            console.log(arabicRegex.test(role.value.ar_name));
 
             return true
         }
-        console.log(arabicRegex.test(role.value.ar_name));
         return t('errors.Ar_letters')
     }
 

@@ -71,10 +71,10 @@ const items = ref(['Admin info', 'Role', 'Password'])
                 :rules="[roleRules]"></v-text-field>
             </v-stepper-window-item>
             <v-stepper-window-item step="3" value="3">
-              <v-text-field clearable v-model="admin.password" type="password" :label="$t('Password')"
-                variant="solo"></v-text-field>
+              <v-text-field clearable v-model="admin.password" type="password" :label="$t('Password')" variant="solo"
+                :rules="[passwordRules]"></v-text-field>
               <v-text-field clearable v-model="confirmPassword" type="password" :label="$t('ConfirmPassword')"
-                variant="solo"></v-text-field>
+                variant="solo" :rules="[confirmPasswordRules]"></v-text-field>
             </v-stepper-window-item>
           </v-stepper-window>
           <v-stepper-actions :disabled="disabled" :next-text="N" @click:next="next"
@@ -87,7 +87,7 @@ const items = ref(['Admin info', 'Role', 'Password'])
 </template>
 
 <script setup>
-import { ref, computed, defineEmits } from 'vue';
+import { ref, computed, defineEmits, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useAdminStore } from '@/stores/storeAdmin';
 import Swal from 'sweetalert2';
@@ -121,6 +121,44 @@ const roleRules = computed(() => {
   return t('errors.role')
 })
 
+const passwordRules = computed(() => {
+  if (admin.value.password) {
+    if (admin.value.password?.length >= 8) return true
+    return t('errors.passwordlength')
+  }
+  return t('errors.password')
+})
+// const confirmPasswordRules = computed(() => {
+//   if (!admin.value.confirmPassword) {
+//     return t('errors.password')
+//   } 
+//   if (admin.value.confirmPassword?.length >= 8) {
+//         return true
+//       }
+//       return t('errors.passwordconfirm')
+
+
+// })
+const confirmPasswordRules = watch(admin.value.confirmPassword,() => {
+  if (!admin.value.confirmPassword) {
+    // If confirmPassword is empty, return an error message
+    console.log('Password:', admin.value.password);
+    console.log('Confirm Password:', admin.value.confirmPassword);
+    return t('errors.password');
+  }
+  if (admin.value.confirmPassword.length < 8) {
+    // If confirmPassword is less than 8 characters, return an error message
+    return t('errors.passwordLength'); // Assuming you have an error for this
+  }
+  if (admin.value.confirmPassword !== admin.value.password) {
+    // If confirmPassword doesn't match password, return an error message
+    return t('errors.passwordconfirm');
+  }
+  // If everything is valid, return true
+  return true;
+});
+
+
 const Toast = Swal.mixin({
   toast: true,
   position: "top-end",
@@ -133,59 +171,54 @@ const Toast = Swal.mixin({
   }
 });
 const next = () => {
-  if (step.value < 3) {
-    if (step.value === 0) {
-      if (admin.value.fullName?.length >= 3 && admin.value.email && admin.value.phoneNumber?.length === 11) {
-        step.value++;
-        console.log('admin info');
-      } if (!admin.value.fullName?.length >= 3 || !admin.value.email || !admin.value.phoneNumber) {
-        console.log("else info");
-        Toast.fire({
-          icon: "error",
-          title: "fill the required fields"
-        });
-      }
+  if (step.value === 0) {
+    if (admin.value.fullName?.length >= 3 && admin.value.email && admin.value.phoneNumber?.length === 11) {
+      step.value++;
+      return true;
     }
-    if (step.value === 1) {
-      if (admin.value.role) {
-        step.value++;
-        console.log('role info');
-      } else {
-        Toast.fire({
-          icon: "error",
-          title: "fill the required fields"
-        });
-      }
-    }
-    // console.log("bafore", step.value);
-
-    // console.log("after", step.value);
-    if (step.value === 2) {
-      N.value = "Submit"
-      if (admin.value.password) {
-        if (admin.value.password === confirmPassword.value) {
-          console.log('password info');
-          storeAdmin.addAdmin(admin.value)
-          Toast.fire({
-            icon: "success",
-            title: "admin added successfully"
-          });
-          emit('handleCloseDialog')
-        } else {
-          Toast.fire({
-            icon: "error",
-            title: "password not match"
-          });
-          console.log('password not match');
-        }
-      } else {
-        Toast.fire({
-          icon: "error",
-          title: "fill the required fields"
-        });
-      }
+    if (admin.value.fullName?.length < 3 || !admin.value.email || admin.value.phoneNumber?.length !== 11) {
+      Toast.fire({
+        icon: "error",
+        title: "fill the required fields"
+      });
     }
   }
+  if (step.value === 1) {
+    if (admin.value.role) {
+      step.value++;
+      return true;
+    } else {
+      Toast.fire({
+        icon: "error",
+        title: "fill the required fields"
+      });
+    }
+  }
+
+  if (step.value === 2) {
+    N.value = "Submit"
+    if (admin.value.password) {
+      if (admin.value.password === confirmPassword.value) {
+        storeAdmin.addAdmin(admin.value)
+        Toast.fire({
+          icon: "success",
+          title: "admin added successfully"
+        });
+        emit('handleCloseDialog')
+      } else {
+        Toast.fire({
+          icon: "error",
+          title: "password not match"
+        });
+      }
+    } else {
+      Toast.fire({
+        icon: "error",
+        title: "fill the required fields"
+      });
+    }
+  }
+
 }
 const prev = () => {
   if (step.value >= 1) {
