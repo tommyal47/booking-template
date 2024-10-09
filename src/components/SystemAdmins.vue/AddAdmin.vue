@@ -1,48 +1,3 @@
-<!-- eslint-disable vue/valid-v-slot -->
-<!-- <template>
-  <div class="text-center pa-4">
-    <v-dialog v-model="dialog" persistent>
-      <v-card class="mx-auto" width="500" prepend-icon="" title="Add Admin">
-        <v-sheet class="mx-auto" width="500">
-          <v-stepper :items="items">
-            <template v-slot:item.1>
-              <v-card>
-                <v-text-field clearable label="full name" variant="solo"></v-text-field>
-                <v-text-field clearable label="email" variant="solo"></v-text-field>
-                <v-text-field clearable label="phone" variant="solo"></v-text-field>
-              </v-card>
-            </template>
-
-            <template v-slot:item.2>
-              <v-card>
-                <v-text-field clearable label="role" variant="solo"></v-text-field>
-              </v-card>
-            </template>
-
-            <template v-slot:item.3>
-              <v-card @click="$emit('handleCloseDialog')">
-                <v-text-field clearable label="password" variant="solo"></v-text-field>
-                <v-text-field clearable label="confirm password" variant="solo"></v-text-field>
-              </v-card>
-              <v-stepper-actions ></v-stepper-actions>
-            </template>
-          </v-stepper>
-        </v-sheet>
-      </v-card>
-    </v-dialog>
-  </div>
-</template> -->
-
-<!-- <script setup>
-import { ref, defineEmits } from 'vue';
-
-const dialog = ref(true);
-defineEmits('[handleCloseDialog]')
-
-const items = ref(['Admin info', 'Role', 'Password'])
-</script> -->
-
-
 <template>
   <v-dialog v-model="dialog" persistent>
     <v-card class="mx-auto" width="500" prepend-icon="" title="Add Admin">
@@ -87,7 +42,7 @@ const items = ref(['Admin info', 'Role', 'Password'])
 </template>
 
 <script setup>
-import { ref, computed, defineEmits, watch } from 'vue';
+import { ref, computed, defineEmits } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useAdminStore } from '@/stores/storeAdmin';
 import Swal from 'sweetalert2';
@@ -128,35 +83,16 @@ const passwordRules = computed(() => {
   }
   return t('errors.password')
 })
-// const confirmPasswordRules = computed(() => {
-//   if (!admin.value.confirmPassword) {
-//     return t('errors.password')
-//   } 
-//   if (admin.value.confirmPassword?.length >= 8) {
-//         return true
-//       }
-//       return t('errors.passwordconfirm')
+const confirmPasswordRules = computed(() => {
+  if (!confirmPassword.value) {
+    return t('errors.password')
+  } 
+  if (confirmPassword.value === admin.value.password) {
+        return true
+      }
+      return t('errors.passwordconfirm')
+})
 
-
-// })
-const confirmPasswordRules = watch(admin.value.confirmPassword,() => {
-  if (!admin.value.confirmPassword) {
-    // If confirmPassword is empty, return an error message
-    console.log('Password:', admin.value.password);
-    console.log('Confirm Password:', admin.value.confirmPassword);
-    return t('errors.password');
-  }
-  if (admin.value.confirmPassword.length < 8) {
-    // If confirmPassword is less than 8 characters, return an error message
-    return t('errors.passwordLength'); // Assuming you have an error for this
-  }
-  if (admin.value.confirmPassword !== admin.value.password) {
-    // If confirmPassword doesn't match password, return an error message
-    return t('errors.passwordconfirm');
-  }
-  // If everything is valid, return true
-  return true;
-});
 
 
 const Toast = Swal.mixin({
