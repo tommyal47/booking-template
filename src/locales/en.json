@@ -36,6 +36,11 @@
     "AddRole": "add role",
     "Admins": "Admins",
     "AddAdmin": "Add Admin",
+    "AdminInfo": "Admin Info",
+    "RoleInfo": "Role Info",
+    "PasswordInfo": "Password Info",
+    "Next": "Next",
+    "Prev": "Prev",
     "errors": {
         "username": "User name is required",
         "password": "Password is required",
@@ -49,7 +54,8 @@
         "Ar_name" : "Arabic name is required",
         "En_letters": "'Please enter English letters only.",
         "Ar_letters": "'Please enter Arabic letters only.",
-        "role": "Role field is required"
+        "role": "Role field is required",
+        "requiredfields": "fill the required fields"
     }
 
 }

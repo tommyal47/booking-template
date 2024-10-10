@@ -1,15 +1,15 @@
 <template>
   <v-dialog v-model="dialog" persistent>
-    <v-card class="mx-auto" width="500" prepend-icon="" title="Add Admin">
+    <v-card class="mx-auto" width="500" prepend-icon="" :title="$t('AddAdmin')">
       <v-sheet class="mx-auto" width="500">
         <v-stepper v-model="step">
           <!-- <template v-slot:default="{ prev, next }"> -->
           <v-stepper-header>
-            <v-stepper-item title="admin info" value="1">
+            <v-stepper-item :title="$t('AdminInfo')" value="1">
             </v-stepper-item>
-            <v-stepper-item title="role info" value="2">
+            <v-stepper-item :title="$t('RoleInfo')" value="2">
             </v-stepper-item>
-            <v-stepper-item title="password info" value="3">
+            <v-stepper-item :title="$t('PasswordInfo')" value="3">
             </v-stepper-item>
           </v-stepper-header>
           <v-stepper-window>
@@ -32,7 +32,7 @@
                 variant="solo" :rules="[confirmPasswordRules]"></v-text-field>
             </v-stepper-window-item>
           </v-stepper-window>
-          <v-stepper-actions :disabled="disabled" :next-text="N" @click:next="next"
+          <v-stepper-actions :disabled="disabled" :prev-text="$t('Prev')" :next-text="N" @click:next="next"
             @click:prev="prev"></v-stepper-actions>
           <!-- </template> -->
         </v-stepper>
@@ -51,7 +51,7 @@ const storeAdmin = useAdminStore()
 const { t } = useI18n();
 const emit = defineEmits(['handleCloseDialog']);
 const step = ref(0)
-const N = ref("next")
+let N = t('Next')
 const admin = ref({})
 const confirmPassword = ref()
 const disabled = computed(() => step.value === 0 ? 'prev' : false)
@@ -86,11 +86,11 @@ const passwordRules = computed(() => {
 const confirmPasswordRules = computed(() => {
   if (!confirmPassword.value) {
     return t('errors.password')
-  } 
+  }
   if (confirmPassword.value === admin.value.password) {
-        return true
-      }
-      return t('errors.passwordconfirm')
+    return true
+  }
+  return t('errors.passwordconfirm')
 })
 
 
@@ -111,28 +111,30 @@ const next = () => {
     if (admin.value.fullName?.length >= 3 && admin.value.email && admin.value.phoneNumber?.length === 11) {
       step.value++;
       return true;
+
+
     }
     if (admin.value.fullName?.length < 3 || !admin.value.email || admin.value.phoneNumber?.length !== 11) {
       Toast.fire({
         icon: "error",
-        title: "fill the required fields"
+        title: t('errors.requiredfields')
       });
     }
   }
   if (step.value === 1) {
     if (admin.value.role) {
       step.value++;
+      N = t('Submit')
       return true;
     } else {
       Toast.fire({
         icon: "error",
-        title: "fill the required fields"
+        title: t('errors.requiredfields')
       });
     }
   }
 
   if (step.value === 2) {
-    N.value = "Submit"
     if (admin.value.password) {
       if (admin.value.password === confirmPassword.value) {
         storeAdmin.addAdmin(admin.value)
@@ -144,13 +146,13 @@ const next = () => {
       } else {
         Toast.fire({
           icon: "error",
-          title: "password not match"
+          title: t('errors.passwordconfirm')
         });
       }
     } else {
       Toast.fire({
         icon: "error",
-        title: "fill the required fields"
+        title: t('errors.requiredfields')
       });
     }
   }
@@ -158,7 +160,7 @@ const next = () => {
 }
 const prev = () => {
   if (step.value >= 1) {
-    N.value = "next"
+    N = t('Next')
     step.value--;
   }
 };

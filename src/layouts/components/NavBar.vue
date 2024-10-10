@@ -10,7 +10,7 @@
 
 <script setup>
 import { useI18n } from 'vue-i18n';
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 
 const loggedIn = computed(() => {
     return localStorage.getItem('auth') ? true : false;
@@ -25,7 +25,13 @@ const handleLogout = () => {
 
 const changeLanguage = () => {
     locale.value = locale.value === 'en' ? 'ar' : 'en';
+    document.documentElement.setAttribute('dir', locale.value === 'ar' ? 'rtl' : 'ltr');
     localStorage.setItem('lang', locale.value);
+
 }
+onMounted(() => {
+    const language = localStorage.getItem('lang');
+    document.documentElement.setAttribute('dir', language === 'ar' ? 'rtl' : 'ltr');
+})
 
 </script>
