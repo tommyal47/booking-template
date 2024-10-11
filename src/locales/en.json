@@ -41,6 +41,7 @@
     "PasswordInfo": "Password Info",
     "Next": "Next",
     "Prev": "Prev",
+    "SucessAddAdmin": "admin added successfully",
     "errors": {
         "username": "User name is required",
         "password": "Password is required",

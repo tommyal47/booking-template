@@ -3,7 +3,7 @@
         <v-dialog v-model="dialog" persistent>
             <v-row align:center justify="center" dense>
                 <v-col cols="12" md="6">
-                    <v-card class="mx-auto" width="400" prepend-icon="" title="Admin Data"
+                    <v-card class="mx-auto" width="400" prepend-icon="" :title="$t('AdminInfo')"
                         :subtitle="$t('ID') + ': ' + props.admin.id">
                         <v-card-item>
                             {{$t('Name')}}: {{ admin.fullName }}

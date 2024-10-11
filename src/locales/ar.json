@@ -41,6 +41,7 @@
     "PasswordInfo": "اختيار كلمة السر",
     "Next": "التالي",
     "Prev": "السابق",
+    "SucessAddAdmin": "تم اضافة الادمن بنجاح",
     "errors": {
         "username": "اسم المستخدم مطلوب",
         "password": "كلمة السر مطلوبة",

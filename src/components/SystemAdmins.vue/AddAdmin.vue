@@ -140,7 +140,7 @@ const next = () => {
         storeAdmin.addAdmin(admin.value)
         Toast.fire({
           icon: "success",
-          title: "admin added successfully"
+          title: t('SucessAddAdmin')
         });
         emit('handleCloseDialog')
       } else {
