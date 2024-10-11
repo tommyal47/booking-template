@@ -33,4 +33,10 @@ export const useRoleStore = defineStore('storeRole', {
   
         }
     },
+    getters: {
+        allRoles(state) {
+            let all = state.roles.forEach((r) => r.en_name)
+            return all
+        }
+    }
 })

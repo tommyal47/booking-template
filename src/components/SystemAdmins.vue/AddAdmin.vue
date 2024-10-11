@@ -22,8 +22,9 @@
                 :rules="[phoneRules]"></v-text-field>
             </v-stepper-window-item>
             <v-stepper-window-item step="2" value="2">
-              <v-text-field clearable v-model="admin.role" :label="$t('Role')" variant="solo"
-                :rules="[roleRules]"></v-text-field>
+              <!-- <v-text-field clearable v-model="admin.role" :label="$t('Role')" variant="solo"
+                :rules="[roleRules]"></v-text-field> -->
+              <v-select :label="$t('Role')" v-model="admin.role" :items="allRoles" variant="solo" :rules="[roleRules]"></v-select>
             </v-stepper-window-item>
             <v-stepper-window-item step="3" value="3">
               <v-text-field clearable v-model="admin.password" type="password" :label="$t('Password')" variant="solo"
@@ -42,11 +43,19 @@
 </template>
 
 <script setup>
-import { ref, computed, defineEmits } from 'vue';
+import { ref, computed, defineEmits, onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useAdminStore } from '@/stores/storeAdmin';
+import { useRoleStore } from '@/stores/storeRole';
 import Swal from 'sweetalert2';
 const storeAdmin = useAdminStore()
+const storeRole = useRoleStore()
+
+const allRoles = ref([])
+
+onMounted(() => {
+  allRoles.value = storeRole.roles.map(r => r.en_name); // Use map to create a new array
+});
 
 const { t } = useI18n();
 const emit = defineEmits(['handleCloseDialog']);
