@@ -42,6 +42,8 @@
     "Next": "Next",
     "Prev": "Prev",
     "SucessAddAdmin": "admin added successfully",
+    "SucessEditAdmin": "admin Edited successfully",
+    "EditAdmin": "Edit Admin",
     "errors": {
         "username": "User name is required",
         "password": "Password is required",

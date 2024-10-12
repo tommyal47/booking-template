@@ -4,7 +4,8 @@
         <template v-slot:[`item.actions`]="{ item }">
             <div class="d-flex justify-space-around flex-wrap pa-2 ml-30">
                 <v-btn class="ma-2" color="green-lighten-1" @click="showAdmin(item)" size="33px" icon="mdi-eye"></v-btn>
-                <v-btn class="ma-2" color="green-lighten-1" size="33px" icon="mdi-pencil"></v-btn>
+                <v-btn class="ma-2" color="green-lighten-1" size="33px" @click="editAdmin(item)"
+                    icon="mdi-pencil"></v-btn>
                 <v-btn class="ma-2" color="orange-lighten-1" @click="handleDeleteAdmin(item.id)" size="33px"
                     icon="mdi-delete"></v-btn>
             </div>
@@ -15,6 +16,9 @@
     </div>
     <div v-if="openAddDialog">
         <AddAdmin @handleCloseDialog="handleCloseDialog" />
+    </div>
+    <div v-if="openEditDialog">
+        <EditAdmin :admin="admin" @handleCloseDialog="handleCloseDialog" />
     </div>
 
 </template>
@@ -30,6 +34,7 @@ import AddAdmin from './AddAdmin.vue';
 // import handleDeleteUser from './DeleteUser.vue'
 import { useI18n } from 'vue-i18n';
 import Swal from 'sweetalert2';
+import EditAdmin from './EditAdmin.vue';
 
 const storeAdmin = useAdminStore()
 const { t } = useI18n(); // Access the translation function
@@ -47,6 +52,7 @@ const headers = computed(() => [
 
 const openShowDialog = ref(false);
 const openAddDialog = ref(false);
+const openEditDialog = ref(false);
 const admin = ref({})
 const showAdmin = (item) => {
     openShowDialog.value = true;
@@ -56,10 +62,16 @@ const showAdmin = (item) => {
 const handleCloseDialog = () => {
     openShowDialog.value = false;
     openAddDialog.value = false;
+    openEditDialog.value = false;
 }
 
 const addAdmin = () => {
     openAddDialog.value = true
+}
+
+const editAdmin = (item) => {
+    openEditDialog.value = true;
+    admin.value = item
 }
 
 const handleDeleteAdmin = (id) => {

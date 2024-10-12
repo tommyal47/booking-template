@@ -27,6 +27,13 @@ export const useAdminStore = defineStore('storeAdmin',{
                 this.admins.push(admin)
             }
         },
+        editAdmin(admin) {
+            const index = this.admins.findIndex((a) => a.id === admin.id)
+            this.admins[index].fullName = admin.fullName
+            this.admins[index].email = admin.email
+            this.admins[index].phoneNumber = admin.phoneNumber
+            this.admins[index].role = admin.role
+        },
         deleteAdmin(id) {
             this.admins = this.admins.filter(admin => admin.id !== id);
         }
