@@ -1,6 +1,6 @@
 <template>
     <v-btn class="add-btn" @click="addAdmin">{{ $t('AddAdmin') }}</v-btn>
-    <v-data-table :headers="headers" :items="storeAdmin.admins" density="compact" item-key="name">
+    <v-data-table class="centerlize" :headers="headers" :items="storeAdmin.admins" density="compact" item-key="name">
         <template v-slot:[`item.actions`]="{ item }">
             <div class="d-flex justify-space-around flex-wrap pa-2 ml-30">
                 <v-btn class="ma-2" color="green-lighten-1" @click="showAdmin(item)" size="33px" icon="mdi-eye"></v-btn>
@@ -114,12 +114,3 @@ const handleDeleteAdmin = (id) => {
 }
 
 </script>
-
-
-<style>
-.add-btn {
-    float: left;
-
-
-}
-</style>
