@@ -5,7 +5,7 @@
 
 
 <script setup>
-import IndexAdmins from '@/components/SystemAdmins.vue/IndexAdmins.vue';
+import IndexAdmins from '@/components/admins/IndexAdmins.vue';
 // import AddAdmin from '@/components/SystemAdmins.vue/AddAdmin.vue';
 
 
