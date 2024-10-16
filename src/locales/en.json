@@ -44,7 +44,7 @@
     "SucessAddAdmin": "admin added successfully",
     "SucessEditAdmin": "admin Edited successfully",
     "EditAdmin": "Edit Admin",
-    "Permissions": "Permissions",
+    "Permisions": "Permisions",
     "errors": {
         "username": "User name is required",
         "password": "Password is required",

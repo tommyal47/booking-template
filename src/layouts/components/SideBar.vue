@@ -19,8 +19,8 @@
                         :active="isActive('/admins')">
                     </v-list-item>
                     <v-list-item color="primary" rounded="shaped" prepend-icon="mdi-account-key"
-                        :title="$t('Permissions')" value="Roles" @click="$router.push('/permissions')"
-                        :active="isActive('/permissions')">
+                        :title="$t('Permisions')" value="Roles" @click="$router.push('/permisions')"
+                        :active="isActive('/permisions')">
                     </v-list-item>
                 </v-list>
             </v-navigation-drawer>

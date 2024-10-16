@@ -5,6 +5,7 @@ import Users from '@/views/UsersIndex.vue'
 import LogIn from '@/views/LogIn.vue'
 import RolesIndex from '@/views/roles/RolesIndex.vue'
 import AdminsIndex from '@/views/SystemAdmins/AdminsIndex.vue'
+import PermisionsIndex from '@/views/permisions/PermisionsIndex.vue'
 
 
 const router = createRouter({
@@ -39,6 +40,11 @@ const router = createRouter({
       path: '/admins',
       name: 'admins',
       component: AdminsIndex
+    },
+    {
+      path: '/permisions',
+      name: 'permisions',
+      component: PermisionsIndex
     },
     // {
     //   // path: '/about',
