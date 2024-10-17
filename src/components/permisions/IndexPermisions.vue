@@ -1,6 +1,7 @@
 <template>
     <v-btn class="add-btn" @click="handleAddRole">{{ $t('AddRole') }}</v-btn>
-    <v-data-table class="centerlize" :headers="headers" :items="storeRole.roles" density="compact" item-key="name">
+    <v-data-table class="centerlize" :headers="headers" :items="storPermisions.permissions" density="compact"
+        item-key="name">
         <template v-slot:[`item.actions`]="{ item }">
             <div class="d-flex justify-space-around flex-wrap pa-2 ml-30">
                 <v-btn class="ma-2" @click="showUser(item)" color="green-lighten-1" size="33px" icon="mdi-eye"></v-btn>
@@ -17,11 +18,11 @@
 <script setup>
 import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
-import { useRoleStore } from '@/stores/storeRole';
+import { usePermisionStore } from '@/stores/storePermisions';
 
 import Swal from 'sweetalert2';
 
-const storeRole = useRoleStore()
+const storPermisions = usePermisionStore()
 
 const { t } = useI18n(); // Access the translation function
 
