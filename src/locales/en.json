@@ -45,6 +45,7 @@
     "SucessEditAdmin": "admin Edited successfully",
     "EditAdmin": "Edit Admin",
     "Permisions": "Permisions",
+    "AddPermision": "Add Permision",
     "errors": {
         "username": "User name is required",
         "password": "Password is required",

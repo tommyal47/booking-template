@@ -16,5 +16,18 @@ export const usePermisionStore = defineStore('storePermisions',{
                 }
             ]
         }
+    },
+    actions: {
+        addPermision(permision){
+            permision = {
+                id: Date.now(),
+                en_name: permision.en_name,
+                ar_name: permision.ar_name
+            }
+            if (permision) {
+                this.permissions.push(permision)
+            }
+
+        }
     }
 })

@@ -3,7 +3,7 @@
     <v-data-table class="centerlize" :headers="headers" :items="storeRole.roles" density="compact" item-key="name">
         <template v-slot:[`item.actions`]="{ item }">
             <div class="d-flex justify-space-around flex-wrap pa-2 ml-30">
-                <v-btn class="ma-2" @click="showUser(item)" color="green-lighten-1" size="33px" icon="mdi-eye"></v-btn>
+                <v-btn class="ma-2" @click="showRole(item)" color="green-lighten-1" size="33px" icon="mdi-eye"></v-btn>
                 <v-btn class="ma-2" @click="editRole(item)" color="green-lighten-1" size="33px"
                     icon="mdi-pencil"></v-btn>
                 <v-btn class="ma-2" @click="handleDeleteRole(item.id)" color="orange-lighten-1" size="33px"
@@ -45,7 +45,7 @@ const openShowDialog = ref(false)
 const openAddDialog = ref(false)
 const openEditDialog = ref(false)
 const role = ref(null)
-const showUser = (item) => {
+const showRole = (item) => {
     openShowDialog.value = true
     role.value = item
 }
@@ -115,4 +115,3 @@ const handleDeleteRole = (id) => {
 
 
 </script>
-

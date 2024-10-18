@@ -1,13 +1,13 @@
 <template>
-    <v-btn class="add-btn" @click="handleAddRole">{{ $t('AddRole') }}</v-btn>
+    <v-btn class="add-btn" @click="handleAddPermision">{{ $t('AddPermision') }}</v-btn>
     <v-data-table class="centerlize" :headers="headers" :items="storPermisions.permissions" density="compact"
         item-key="name">
         <template v-slot:[`item.actions`]="{ item }">
             <div class="d-flex justify-space-around flex-wrap pa-2 ml-30">
-                <v-btn class="ma-2" @click="showUser(item)" color="green-lighten-1" size="33px" icon="mdi-eye"></v-btn>
-                <v-btn class="ma-2" @click="editRole(item)" color="green-lighten-1" size="33px"
+                <v-btn class="ma-2" @click="showPermision(item)" color="green-lighten-1" size="33px" icon="mdi-eye"></v-btn>
+                <v-btn class="ma-2" @click="editPermision(item)" color="green-lighten-1" size="33px"
                     icon="mdi-pencil"></v-btn>
-                <v-btn class="ma-2" @click="handleDeleteRole(item.id)" color="orange-lighten-1" size="33px"
+                <v-btn class="ma-2" @click="handleDeletePermision(item.id)" color="orange-lighten-1" size="33px"
                     icon="mdi-delete"></v-btn>
             </div>
         </template>
@@ -36,32 +36,32 @@ const openShowDialog = ref(false)
 const openAddDialog = ref(false)
 const openEditDialog = ref(false)
 const role = ref(null)
-const showUser = (item) => {
+const showPermision = (item) => {
     openShowDialog.value = true
     role.value = item
 }
-const editRole = (item) => {
+const editPermision = (item) => {
     openEditDialog.value = true
     role.value = item
 }
 
-const handleCloseDialog = () => {
-    openShowDialog.value = false
-}
+// const handleCloseDialog = () => {
+//     openShowDialog.value = false
+// }
 
-const handleAddDialog = () => {
-    openAddDialog.value = false
-}
-const handleEditDialog = () => {
-    openEditDialog.value = false
-}
+// const handleAddDialog = () => {
+//     openAddDialog.value = false
+// }
+// const handleEditDialog = () => {
+//     openEditDialog.value = false
+// }
 
-const handleAddRole = () => {
+const handleAddPermision = () => {
     openAddDialog.value = true
 }
 
 
-const handleDeleteRole = (id) => {
+const handleDeletePermision = () => {
     const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
             confirmButton: "btn btn-success text-white",
@@ -83,7 +83,7 @@ const handleDeleteRole = (id) => {
         // },
     }).then((result) => {
         if (result.isConfirmed) {
-            storeRole.deleteRole(id)
+            // storeRole.deleteRole(id)
             swalWithBootstrapButtons.fire({
                 title: t('ConfirmTitle'),
                 text: t('ConfirmBodyRole'),

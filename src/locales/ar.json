@@ -45,6 +45,7 @@
     "SucessEditAdmin": "تم تحديث الادمن بنجاح",
     "EditAdmin": "تعديل بيانات الادمن",
     "Permisions": "الاذونات",
+    "AddPermision": "إضافة إذن",
     "errors": {
         "username": "اسم المستخدم مطلوب",
         "password": "كلمة السر مطلوبة",
