@@ -1,13 +1,13 @@
 <template>
     <div class="text-center pa-4">
         <v-dialog v-model="dialog" persistent>
-            <v-card class="mx-auto" width="400" prepend-icon="" :title="$t('AddRole')">
+            <v-card class="mx-auto" width="400" prepend-icon="" :title="$t('AddPermision')">
                 <v-sheet class="mx-auto" width="300">
-                    <v-form fast-fail @submit.prevent="addRole">
-                        <v-text-field v-model="role.en_name" clearable :rules="[EnRules]" :label="$t('En_Name')"
+                    <v-form fast-fail @submit.prevent="addPermision">
+                        <v-text-field v-model="permision.en_name" clearable :rules="[EnRules]" :label="$t('En_Name')"
                             variant="solo"></v-text-field>
 
-                        <v-text-field v-model="role.ar_name" clearable :rules="[ArRules]" :label="$t('Ar_Name')"
+                        <v-text-field v-model="permision.ar_name" clearable :rules="[ArRules]" :label="$t('Ar_Name')"
                             variant="solo"></v-text-field>
 
                         <v-btn class="mt-2" type="submit" block>{{ $t('Submit') }}</v-btn>
@@ -23,20 +23,20 @@
 <script setup>
 
 import { ref, defineEmits, computed } from 'vue';
-import { useRoleStore } from '@/stores/storeRole';
+import { usePermisionStore } from '@/stores/storePermisions';
 import { useI18n } from 'vue-i18n';
 
-const storeRole = useRoleStore()
-const role = ref({})
+const storePermision = usePermisionStore()
+const permision = ref({})
 const { t } = useI18n();
 
 
 
 const dialog = ref(true);
 
-const addRole = () => {
-    if (role.value.en_name && role.value.ar_name) {
-        storeRole.addRole(role.value)
+const addPermision = () => {
+    if (permision.value.en_name && permision.value.ar_name) {
+        storePermision.addPermision(permision.value)
         emit('handleAddDialog')
     }
 }
@@ -44,8 +44,8 @@ const addRole = () => {
 const emit = defineEmits(['handleAddDialog'])
 const englishRegex = /^[A-Za-z\s]*$/;
 const EnRules = computed(() => {
-    if (role.value.en_name) {
-        if (englishRegex.test(role.value.en_name)){
+    if (permision.value.en_name) {
+        if (englishRegex.test(permision.value.en_name)){
             return true
         }
         return t('errors.En_letters')
@@ -55,8 +55,8 @@ const EnRules = computed(() => {
 })
 const arabicRegex = /^[\u0600-\u06FF\s]*$/;
 const ArRules = computed(() => {
-    if (role.value.ar_name) {
-        if (arabicRegex.test(role.value.ar_name)) {
+    if (permision.value.ar_name) {
+        if (arabicRegex.test(permision.value.ar_name)) {
 
             return true
         }
