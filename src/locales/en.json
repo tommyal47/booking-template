@@ -2,6 +2,7 @@
     "Home": "Home",
     "Users": "Users",
     "AddUser": "Add User",
+    "UserData": "User Data",
     "ID": "ID",
     "Name": "Name",
     "Email": "Email",
@@ -46,6 +47,7 @@
     "EditAdmin": "Edit Admin",
     "Permisions": "Permisions",
     "AddPermision": "Add Permision",
+    "Permision": "Permission",
     "errors": {
         "username": "User name is required",
         "password": "Password is required",

@@ -6,13 +6,18 @@ export const usePermisionStore = defineStore('storePermisions',{
             permissions: [
                 {
                     id: 1,
-                    en_name: 'view_admin_panel',
-                    ar_name: 'Can view admin panel'
+                    en_name: 'view admin',
+                    ar_name: 'عرض الادمن'
                 },
                 {
                     id: 2,
-                    en_name: 'edit_users',
-                    ar_name: 'Can edit users'
+                    en_name: 'edit admin',
+                    ar_name: 'تعديل الادمن'
+                },
+                {
+                    id: 3,
+                    en_name: 'delete admin',
+                    ar_name: 'حذف الادمن'
                 }
             ]
         }

@@ -13,12 +13,16 @@
         </template>
     </v-data-table>
 
+    <div v-if="openShowDialog">
+        <ShowPermision :permision="permision" @handleCloseDialog="handleCloseDialog"/>
+    </div>
 </template>
 
 <script setup>
 import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { usePermisionStore } from '@/stores/storePermisions';
+import ShowPermision from './ShowPermision.vue';
 
 import Swal from 'sweetalert2';
 
@@ -35,19 +39,19 @@ const headers = computed(() => [
 const openShowDialog = ref(false)
 const openAddDialog = ref(false)
 const openEditDialog = ref(false)
-const role = ref(null)
+const permision = ref(null)
 const showPermision = (item) => {
     openShowDialog.value = true
-    role.value = item
+    permision.value = item
 }
 const editPermision = (item) => {
     openEditDialog.value = true
-    role.value = item
+    permision.value = item
 }
 
-// const handleCloseDialog = () => {
-//     openShowDialog.value = false
-// }
+const handleCloseDialog = () => {
+    openShowDialog.value = false
+}
 
 // const handleAddDialog = () => {
 //     openAddDialog.value = false

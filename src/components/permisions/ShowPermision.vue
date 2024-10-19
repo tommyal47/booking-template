@@ -3,16 +3,13 @@
         <v-dialog v-model="dialog" persistent>
             <v-row align:center justify="center" dense>
                 <v-col cols="12" md="6">
-                    <v-card class="mx-auto" width="400" prepend-icon="" :title="$t('UserData')"
-                        :subtitle="$t('ID') + ': ' + props.user.id">
+                    <v-card class="mx-auto" width="400" prepend-icon="" :title="$t('Permision')"
+                        :subtitle="$t('ID') + ': ' + props.permision.id">
                         <v-card-item>
-                            {{$t('Name')}}: {{ user.fullName }}
+                            {{ $t('En_Name') }}: {{ permision.en_name }}
                         </v-card-item>
                         <v-card-item>
-                            {{$t('Email')}}: {{ user.email }}
-                        </v-card-item>
-                        <v-card-item>
-                            {{$t('Phone')}}: {{ user.phoneNumber }}
+                            {{ $t('Ar_Name') }}: {{ permision.ar_name }}
                         </v-card-item>
                         <template v-slot:actions>
                             <v-btn class="ms-auto" :text="$t('Close')" @click="$emit('handleCloseDialog')"></v-btn>
@@ -28,7 +25,7 @@
 import { ref, defineEmits, defineProps } from 'vue';
 
 const props = defineProps({
-    user: {
+    permision: {
         type: Object,
         Required: true,
     }
