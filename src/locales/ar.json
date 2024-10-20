@@ -49,6 +49,8 @@
     "Permisions": "الاذونات",
     "AddPermision": "إضافة إذن",
     "Permision": "إذن",
+    "SucessAddPermision": "تم إضافة الإذن بنجاح",
+    "SucessEditPermision": "تم تعديل الإذن بنجاح",
     "errors": {
         "username": "اسم المستخدم مطلوب",
         "password": "كلمة السر مطلوبة",

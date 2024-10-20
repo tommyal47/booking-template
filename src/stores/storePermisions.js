@@ -30,8 +30,14 @@ export const usePermisionStore = defineStore('storePermisions',{
                 ar_name: permision.ar_name
             }
             if (permision) {
-                this.permissions.push(permision)
+                this.permisions.push(permision)
             }
+
+        },
+        editPermision(permision){
+            const index = this.permisions.findIndex((p) => p.id === permision.id)
+            this.permisions[index].en_name = permision.en_name
+            this.permisions[index].ar_name = permision.ar_name
 
         },
         deletePermission(id){

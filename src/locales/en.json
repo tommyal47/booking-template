@@ -49,6 +49,8 @@
     "Permisions": "Permisions",
     "AddPermision": "Add Permision",
     "Permision": "Permission",
+    "SucessAddPermision": "Permision added successfully",
+    "SucessEditPermision": "Permision updated successfully",
     "errors": {
         "username": "User name is required",
         "password": "Password is required",

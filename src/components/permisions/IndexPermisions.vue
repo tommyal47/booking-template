@@ -19,6 +19,9 @@
     <div v-if="openAddDialog">
         <AddPermision  @handleAddDialog="handleAddDialog"/>
     </div>
+    <div v-if="openEditDialog">
+        <EditPermision  :permision="permision" @handleEditDialog="handleEditDialog"/>
+    </div>
 </template>
 
 <script setup>
@@ -27,6 +30,7 @@ import { useI18n } from 'vue-i18n';
 import { usePermisionStore } from '@/stores/storePermisions';
 import ShowPermision from './ShowPermision.vue';
 import AddPermision from './AddPermision.vue';
+import EditPermision from './EditPermision.vue';
 
 import Swal from 'sweetalert2';
 
@@ -60,9 +64,9 @@ const handleCloseDialog = () => {
 const handleAddDialog = () => {
     openAddDialog.value = false
 }
-// const handleEditDialog = () => {
-//     openEditDialog.value = false
-// }
+const handleEditDialog = () => {
+    openEditDialog.value = false
+}
 
 const handleAddPermision = () => {
     openAddDialog.value = true
