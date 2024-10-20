@@ -3,7 +3,7 @@ import { defineStore } from "pinia";
 export const usePermisionStore = defineStore('storePermisions',{
     state: () => {
         return {
-            permissions: [
+            permisions: [
                 {
                     id: 1,
                     en_name: 'view admin',
@@ -33,6 +33,9 @@ export const usePermisionStore = defineStore('storePermisions',{
                 this.permissions.push(permision)
             }
 
+        },
+        deletePermission(id){
+            this.permisions = this.permisions.filter(permision => permision.id !== id)
         }
     }
 })

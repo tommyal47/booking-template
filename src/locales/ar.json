@@ -24,6 +24,7 @@
     "ConfirmBodyUser": ".تم حذف المستخدم بنجاح",
     "ConfirmBodyRole": ".تم حذف الدور بنجاح",
     "ConfirmBodyAdmin": ".تم حذف الادمن بنجاح",
+    "ConfirmBodyPermision": ".تم حذف الإذن بنجاح",
     "Ok": "حسنا",
     "UserNAme": "إسم المستخدم",
     "Password": "كلمة السر",

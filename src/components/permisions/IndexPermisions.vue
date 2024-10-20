@@ -1,6 +1,6 @@
 <template>
     <v-btn class="add-btn" @click="handleAddPermision">{{ $t('AddPermision') }}</v-btn>
-    <v-data-table class="centerlize" :headers="headers" :items="storPermisions.permissions" density="compact"
+    <v-data-table class="centerlize" :headers="headers" :items="storPermisions.permisions" density="compact"
         item-key="name">
         <template v-slot:[`item.actions`]="{ item }">
             <div class="d-flex justify-space-around flex-wrap pa-2 ml-30">
@@ -69,7 +69,7 @@ const handleAddPermision = () => {
 }
 
 
-const handleDeletePermision = () => {
+const handleDeletePermision = (id) => {
     const swalWithBootstrapButtons = Swal.mixin({
         customClass: {
             confirmButton: "btn btn-success text-white",
@@ -91,10 +91,10 @@ const handleDeletePermision = () => {
         // },
     }).then((result) => {
         if (result.isConfirmed) {
-            // storeRole.deleteRole(id)
+            storPermisions.deletePermission(id)
             swalWithBootstrapButtons.fire({
                 title: t('ConfirmTitle'),
-                text: t('ConfirmBodyRole'),
+                text: t('ConfirmBodyPermision'),
                 icon: "success",
                 confirmButtonText: t('Ok')
             });
