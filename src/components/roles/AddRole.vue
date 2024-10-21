@@ -105,7 +105,13 @@ const addRole = () => {
 // })
 
 const changePermision = (permisions) => {
+
     role.value.permisions.role_name.push(permisions)
+    if (role.value.permisions.role_name.includes(permisions)) {
+        const index = role.value.permisions.role_name.indexOf(permisions)
+        role.value.permisions.role_name.splice(index, 1)
+        
+    }
 }
 
 const emit = defineEmits(['handleAddDialog'])
