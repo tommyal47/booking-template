@@ -1,3 +1,5 @@
+<!-- eslint-disable vue/no-unused-vars -->
+<!-- eslint-disable vue/valid-v-for -->
 <template>
     <v-dialog v-model="dialog" persistent>
         <v-card class="mx-auto" width="500" prepend-icon="" title="Add Role">
@@ -17,10 +19,19 @@
                                 variant="solo"></v-text-field>
                         </v-stepper-window-item>
                         <v-stepper-window-item step="2" value="2">
-
+                            <v-container fluid>
+                                <v-row v-for="r in storeRole.roles" :role_name="r.ar_name">
+                                    <div>{{ r.en_name }}</div>
+                                    <v-col cols="12" md="3" sm="4" v-for="permision in storePermision.permisions">
+                                        <v-checkbox color="info" v-model="role.permisions.role_name"
+                                            @change="(e) => changePermision(e.target.value)" :label="permision.en_name"
+                                            :value="permision.en_name" hide-details></v-checkbox>
+                                    </v-col>
+                                </v-row>
+                            </v-container>
                         </v-stepper-window-item>
                     </v-stepper-window>
-                    <v-stepper-actions :disabled="disabled" :prev-text="$t('Prev')" :next-text="N" @click:next="next"
+                    <v-stepper-actions :prev-text="$t('Prev')" :next-text="N" @click:next="next"
                         @click:prev="prev"></v-stepper-actions>
                 </v-stepper>
             </v-sheet>
@@ -61,23 +72,40 @@
 
 import { ref, defineEmits, computed } from 'vue';
 import { useRoleStore } from '@/stores/storeRole';
+import { usePermisionStore } from '@/stores/storePermisions';
 import { useI18n } from 'vue-i18n';
 
 const storeRole = useRoleStore()
-const role = ref({})
+const storePermision = usePermisionStore()
+const role = ref({
+    permisions: {
+        role_name: []
+    }
+})
 const { t } = useI18n();
 import Swal from 'sweetalert2';
 
 const step = ref(0)
 let N = t('Next')
-
+// const selected = ref([])
 const dialog = ref(true);
-
+// const role_name = ref();
+// const all_roles = ref(storeRole.roles)
 const addRole = () => {
     if (role.value.en_name && role.value.ar_name) {
         storeRole.addRole(role.value)
         emit('handleAddDialog')
     }
+}
+
+// const selectedValue = ref('')
+
+// watch(selectedValue, curr => {
+//     role.permisions.role_name
+// })
+
+const changePermision = (permisions) => {
+    role.value.permisions.role_name.push(permisions)
 }
 
 const emit = defineEmits(['handleAddDialog'])
@@ -139,9 +167,9 @@ const next = () => {
         if (role.value.permisions) {
             addRole()
             Toast.fire({
-          icon: "success",
-          title: t('SucessAddAdmin')
-        });
+                icon: "success",
+                title: t('SucessAddAdmin')
+            });
         } else {
             Toast.fire({
                 icon: "error",
@@ -155,6 +183,8 @@ const prev = () => {
     if (step.value >= 1) {
         N = t('Next')
         step.value--;
+        console.log(role.value.permisions);
+
     }
 };
 
