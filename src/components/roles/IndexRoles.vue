@@ -1,6 +1,7 @@
 <template>
     <v-btn class="add-btn" @click="handleAddRole">{{ $t('AddRole') }}</v-btn>
-    <v-data-table class="centerlize" :headers="headers" :items="storeRole.roles" density="compact" item-key="name">
+    <v-data-table style="width: 3000px;" class="centerlize" :headers="headers" :items="storeRole.roles"
+        density="compact" item-key="name">
         <template v-slot:[`item.actions`]="{ item }">
             <div class="d-flex justify-space-around flex-wrap pa-2 ml-30">
                 <v-btn class="ma-2" @click="showRole(item)" color="green-lighten-1" size="33px" icon="mdi-eye"></v-btn>
@@ -39,6 +40,15 @@ const headers = computed(() => [
     { title: t('ID'), align: 'center', key: 'id' },
     { title: t('En_Name'), align: 'center', key: 'en_name' },
     { title: t('Ar_Name'), align: 'center', key: 'ar_name' },
+    // { title: "permisions", align: 'center', key: 'permisions.user' },
+    {
+        title: "permisions", align: 'center', children: [
+            { title: 'user', align: 'center', key: 'permisions.user' },
+            { title: 'admin', align: 'center', key: 'permisions.admin' },
+            { title: 'role', align: 'center', key: 'permisions.role' },
+            { title: 'permisions', align: 'center', key: 'permisions.permisions' },
+        ]
+    },
     { title: t('Actions'), align: 'center', key: 'actions' }
 ])
 const openShowDialog = ref(false)
@@ -112,6 +122,7 @@ const handleDeleteRole = (id) => {
         }
     });
 }
+console.log(storeRole.roles[0].permisions.admin);
 
 
 </script>

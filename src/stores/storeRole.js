@@ -7,7 +7,13 @@ export const useRoleStore = defineStore('storeRole', {
                 {
                     id: 1,
                     en_name: 'admin',
-                    ar_name: 'مدير'
+                    ar_name: 'مدير',
+                    permisions: {
+                        user: ['add','edit','delete','access'],
+                        admin: ['add','edit','delete','access'],
+                        role: ['add','edit','delete','access'],
+                        permisions: ['add','edit','delete','access']
+                    }
                 }
             ]
         }
@@ -17,7 +23,13 @@ export const useRoleStore = defineStore('storeRole', {
             role = {
                 id: Date.now(),
                 en_name: role.en_name,
-                ar_name: role.ar_name
+                ar_name: role.ar_name,
+                permisions: {
+                    user: [role.permisions.user],
+                    admin: [role.permisions.admin],
+                    role: [role.permisions.role],
+                    permisions: [role.permisions.permisions]
+                }
             }
             if (role){
                 this.roles.push(role)
