@@ -111,7 +111,7 @@ const changePermision = (permisions) => {
         const index = role.value.permisions.role_name.indexOf(permisions)
         role.value.permisions.role_name.splice(index, 1)
         
-    }
+    } 
 }
 
 const emit = defineEmits(['handleAddDialog'])
