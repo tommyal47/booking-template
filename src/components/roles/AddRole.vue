@@ -20,12 +20,14 @@
                         </v-stepper-window-item>
                         <v-stepper-window-item step="2" value="2">
                             <v-container fluid>
-                                <v-row v-for="r in storeRole.roles" :role_name="r.ar_name">
+                                <v-row v-for="(r, index) in storeRole.roles">
                                     <div>{{ r.en_name }}</div>
+                                    <div>{{ index }}</div>
                                     <v-col cols="12" md="3" sm="4" v-for="permision in storePermision.permisions">
                                         <v-checkbox color="info" v-model="role.permisions.role_name"
-                                            @change="(e) => changePermision(e.target.value)" :label="permision.en_name"
-                                            :value="permision.en_name" hide-details></v-checkbox>
+                                            @change="(e) => changePermision(e.target.value, index)"
+                                            :label="permision.en_name" :value="permision.en_name"
+                                            hide-details></v-checkbox>
                                     </v-col>
                                 </v-row>
                             </v-container>
@@ -74,9 +76,10 @@ import { ref, defineEmits, computed } from 'vue';
 import { useRoleStore } from '@/stores/storeRole';
 import { usePermisionStore } from '@/stores/storePermisions';
 import { useI18n } from 'vue-i18n';
-
 const storeRole = useRoleStore()
 const storePermision = usePermisionStore()
+const role_namew = storeRole.roles.forEach(e => e.en_name)
+const index = ref()
 const role = ref({
     permisions: {
         role_name: []
@@ -84,13 +87,13 @@ const role = ref({
 })
 const { t } = useI18n();
 import Swal from 'sweetalert2';
+console.log(role_namew);
+
+
 
 const step = ref(0)
 let N = t('Next')
-// const selected = ref([])
 const dialog = ref(true);
-// const role_name = ref();
-// const all_roles = ref(storeRole.roles)
 const addRole = () => {
     if (role.value.en_name && role.value.ar_name) {
         storeRole.addRole(role.value)
@@ -98,20 +101,16 @@ const addRole = () => {
     }
 }
 
-// const selectedValue = ref('')
 
-// watch(selectedValue, curr => {
-//     role.permisions.role_name
-// })
-
-const changePermision = (permisions) => {
-
+const changePermision = (permisions, key) => {
+    index.value = key
+    console.log(index.value)
     role.value.permisions.role_name.push(permisions)
     if (role.value.permisions.role_name.includes(permisions)) {
         const index = role.value.permisions.role_name.indexOf(permisions)
         role.value.permisions.role_name.splice(index, 1)
-        
-    } 
+
+    }
 }
 
 const emit = defineEmits(['handleAddDialog'])
@@ -154,6 +153,7 @@ const Toast = Swal.mixin({
 
 
 const next = () => {
+    console.log(index.value);
     if (step.value === 0) {
         if (role.value.ar_name && role.value.ar_name) {
             step.value++;
@@ -189,8 +189,6 @@ const prev = () => {
     if (step.value >= 1) {
         N = t('Next')
         step.value--;
-        console.log(role.value.permisions);
-
     }
 };
 
