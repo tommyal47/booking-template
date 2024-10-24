@@ -3,10 +3,22 @@ import { defineStore } from "pinia";
 export const useRoleStore = defineStore('storeRole', {
     state: () => {
         return{
+            modules: ['user', 'admin', 'role', 'permisions'],
             roles: [
                 {
                     id: 1,
                     en_name: 'admin',
+                    ar_name: 'مدير',
+                    permisions: {
+                        user: ['add','edit','delete','access'],
+                        admin: ['add','edit','delete','access'],
+                        role: ['add','edit','delete','access'],
+                        permisions: ['add','edit','delete','access']
+                    }
+                },
+                {
+                    id: 1,
+                    en_name: 'tester',
                     ar_name: 'مدير',
                     permisions: {
                         user: ['add','edit','delete','access'],

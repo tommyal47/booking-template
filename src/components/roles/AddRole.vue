@@ -18,7 +18,7 @@
                             <v-text-field v-model="role.ar_name" clearable :rules="[ArRules]" :label="$t('Ar_Name')"
                                 variant="solo"></v-text-field>
                         </v-stepper-window-item>
-                        <v-stepper-window-item step="2" value="2">
+                        <!-- <v-stepper-window-item step="2" value="2">
                             <v-container fluid>
                                 <v-row v-for="(r, index) in storeRole.roles">
                                     <div>{{ r.en_name }}</div>
@@ -31,9 +31,29 @@
                                     </v-col>
                                 </v-row>
                             </v-container>
+                        </v-stepper-window-item> -->
+                        <v-stepper-window-item step="2" value="2">
+                            <v-container fluid>
+                                <v-row v-for="(m, index) in storeRole.modules">
+                                    <div>{{ m }}</div>
+                                    <div>{{ index }}</div>
+                                    <v-col cols="12" md="3" sm="4" v-for="permision in storePermision.permisions">
+                                        <!-- <v-checkbox color="info" v-model="role.permisions[index]"
+                                            @change="(e) => changePermision(e.target.value, index)"
+                                            :label="permision.en_name" :value="permision.en_name"
+                                            hide-details></v-checkbox> -->
+                                        <v-checkbox color="info" :label="permision.en_name" :value="permision.en_name"
+                                            :checked="role.permisions[m]?.includes(permision.en_name)"
+                                            @change="(e) => changePermision(m, permision.en_name, e)" hide-details>
+                                        </v-checkbox>
+
+
+                                    </v-col>
+                                </v-row>
+                            </v-container>
                         </v-stepper-window-item>
                     </v-stepper-window>
-                    <v-stepper-actions :prev-text="$t('Prev')" :next-text="N" @click:next="next"
+                    <v-stepper-actions :disabled="disabled" :prev-text="$t('Prev')" :next-text="N" @click:next="next"
                         @click:prev="prev"></v-stepper-actions>
                 </v-stepper>
             </v-sheet>
@@ -79,12 +99,17 @@ import { useI18n } from 'vue-i18n';
 const storeRole = useRoleStore()
 const storePermision = usePermisionStore()
 const role_namew = storeRole.roles.forEach(e => e.en_name)
-const index = ref()
+// const index = ref()
+// const role = ref({
+//     permisions: {
+//         role_name: []
+//     }
+// })
 const role = ref({
     permisions: {
-        role_name: []
     }
 })
+const disabled = computed(() => step.value === 0 ? 'prev' : false)
 const { t } = useI18n();
 import Swal from 'sweetalert2';
 console.log(role_namew);
@@ -102,16 +127,70 @@ const addRole = () => {
 }
 
 
-const changePermision = (permisions, key) => {
-    index.value = key
-    console.log(index.value)
-    role.value.permisions.role_name.push(permisions)
-    if (role.value.permisions.role_name.includes(permisions)) {
-        const index = role.value.permisions.role_name.indexOf(permisions)
-        role.value.permisions.role_name.splice(index, 1)
+// const changePermision = (permisions, key) => {
+//     // index.value = key
+//     // console.log(index.value)
+//     // role.value.permisions.role_name.push(permisions)
+//     // if (role.value.permisions.role_name.includes(permisions)) {
+//     //     const index = role.value.permisions.role_name.indexOf(permisions)
+//     //     role.value.permisions.role_name.splice(index, 1)
+
+//     // }
+//     // role.value.permisions.push(key,[permisions])
+//     const p = []
+//     p.push(permisions)
+//     role.value.permisions[key] = p
+//     // if (role.value.permisions[key].includes(permisions)) {
+//     // const index = role.value.permisions[key].indexOf(permisions)
+//     // role.value.permisions[key].splice(index, 1)
+
+//     // }
+// }
+const changePermision = (key, permisions, event) => {
+    console.log(permisions);
+    if (permisions) {
+        if (!Array.isArray(role.value.permisions[key])) {
+            role.value.permisions[key] = []; // Initialize it as an empty array if it doesn't exist
+        }
+        if (event) {
+            // Add the permission if it's checked
+            if (!role.value.permisions[key].includes(permisions)) {
+                role.value.permisions[key].push(permisions);
+            }
+            else {
+                // Remove the permission if it's unchecked
+                const permIndex = role.value.permisions[key].indexOf(permisions);
+                if (permIndex > -1) {
+                    role.value.permisions[key].splice(permIndex, 1);
+                }
+            }
+        }
 
     }
+
 }
+// const changePermission = (event, roleName, permissionName) => {
+//   // Ensure that the permissions array exists for the role
+//   if (!Array.isArray(role.value.permisions[roleName])) {
+//     role.value.permisions[roleName] = []; // Initialize it as an empty array if it doesn't exist
+//   }
+
+//   const permissionArray = role.value.permisions[roleName];
+
+//   if (event) {
+//     // Add the permission if it's checked
+//     if (!permissionArray.includes(permissionName)) {
+//       permissionArray.push(permissionName);
+//     }
+//   } else {
+//     // Remove the permission if it's unchecked
+//     const permIndex = permissionArray.indexOf(permissionName);
+//     if (permIndex > -1) {
+//       permissionArray.splice(permIndex, 1);
+//     }
+//   }
+// };
+
 
 const emit = defineEmits(['handleAddDialog'])
 const englishRegex = /^[A-Za-z\s]*$/;
@@ -153,11 +232,13 @@ const Toast = Swal.mixin({
 
 
 const next = () => {
-    console.log(index.value);
+    // console.log(index.value);
     if (step.value === 0) {
         if (role.value.ar_name && role.value.ar_name) {
             step.value++;
             N = t('Submit')
+            console.log(step.value);
+            
             return true;
 
 
@@ -190,7 +271,7 @@ const prev = () => {
         N = t('Next')
         step.value--;
         console.log(role.value);
-        
+
     }
 };
 
