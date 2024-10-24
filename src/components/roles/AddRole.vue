@@ -189,6 +189,8 @@ const prev = () => {
     if (step.value >= 1) {
         N = t('Next')
         step.value--;
+        console.log(role.value);
+        
     }
 };
 
