@@ -122,7 +122,7 @@ const handleDeleteRole = (id) => {
         }
     });
 }
-console.log(storeRole.roles[0].permisions.admin);
+// console.log(storeRole.roles[0].permisions.admin);
 
 
 </script>

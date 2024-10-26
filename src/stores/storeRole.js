@@ -37,10 +37,10 @@ export const useRoleStore = defineStore('storeRole', {
                 en_name: role.en_name,
                 ar_name: role.ar_name,
                 permisions: {
-                    user: [role.permisions.user],
-                    admin: [role.permisions.admin],
-                    role: [role.permisions.role],
-                    permisions: [role.permisions.permisions]
+                    user: role.permisions.user,
+                    admin: role.permisions.admin,
+                    role: role.permisions.role,
+                    permisions: role.permisions.permisions
                 }
             }
             if (role){

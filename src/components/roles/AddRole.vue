@@ -46,8 +46,6 @@
                                             :checked="role.permisions[m]?.includes(permision.en_name)"
                                             @change="(e) => changePermision(m, permision.en_name, e)" hide-details>
                                         </v-checkbox>
-
-
                                     </v-col>
                                 </v-row>
                             </v-container>
@@ -98,7 +96,6 @@ import { usePermisionStore } from '@/stores/storePermisions';
 import { useI18n } from 'vue-i18n';
 const storeRole = useRoleStore()
 const storePermision = usePermisionStore()
-const role_namew = storeRole.roles.forEach(e => e.en_name)
 // const index = ref()
 // const role = ref({
 //     permisions: {
@@ -112,7 +109,7 @@ const role = ref({
 const disabled = computed(() => step.value === 0 ? 'prev' : false)
 const { t } = useI18n();
 import Swal from 'sweetalert2';
-console.log(role_namew);
+// console.log(role_namew);
 
 
 
@@ -123,6 +120,8 @@ const addRole = () => {
     if (role.value.en_name && role.value.ar_name) {
         storeRole.addRole(role.value)
         emit('handleAddDialog')
+        // console.log(role.value);
+
     }
 }
 
@@ -147,7 +146,7 @@ const addRole = () => {
 //     // }
 // }
 const changePermision = (key, permisions, event) => {
-    console.log(permisions);
+    // console.log(permisions);
     if (permisions) {
         if (!Array.isArray(role.value.permisions[key])) {
             role.value.permisions[key] = []; // Initialize it as an empty array if it doesn't exist
@@ -237,8 +236,8 @@ const next = () => {
         if (role.value.ar_name && role.value.ar_name) {
             step.value++;
             N = t('Submit')
-            console.log(step.value);
-            
+            // console.log(step.value);
+
             return true;
 
 
@@ -270,7 +269,7 @@ const prev = () => {
     if (step.value >= 1) {
         N = t('Next')
         step.value--;
-        console.log(role.value);
+        // console.log(role.value);
 
     }
 };

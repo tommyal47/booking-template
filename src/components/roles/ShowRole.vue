@@ -11,6 +11,19 @@
                         <v-card-item>
                             {{ $t('Ar_Name') }}: {{ role.ar_name }}
                         </v-card-item>
+                        <v-card-item>
+                            {{ 'permisions' }}:
+                            <div class="ma-1" v-for="m in storeRole.modules" :key="m">
+
+                                <v-chip variant="outlined" color="green">{{ m }}:</v-chip>
+                                <div v-if="role.permisions[m]">
+                                    <v-chip v-for="permission in role.permisions[m]" :key="permission" color="secondary"
+                                        class="ma-1">
+                                        {{ permission }}
+                                    </v-chip>
+                                </div>
+                            </div>
+                        </v-card-item>
                         <template v-slot:actions>
                             <v-btn class="ms-auto" :text="$t('Close')" @click="$emit('handleCloseDialog')"></v-btn>
                         </template>
@@ -23,6 +36,8 @@
 
 <script setup>
 import { ref, defineProps, defineEmits } from 'vue';
+import { useRoleStore } from '@/stores/storeRole';
+const storeRole = useRoleStore()
 
 const dialog = ref(true)
 
