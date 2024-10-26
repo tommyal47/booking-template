@@ -3,7 +3,7 @@
         <v-dialog v-model="dialog" persistent>
             <v-row align:center justify="center" dense>
                 <v-col cols="12" md="6">
-                    <v-card class="mx-auto" width="400" prepend-icon="" title="User data"
+                    <v-card class="mx-auto" width="400" prepend-icon="" :title="$t('RoleInfo')"
                         :subtitle="$t('ID') + ': ' + role.id">
                         <v-card-item>
                             {{ $t('En_Name') }}: {{ role.en_name }}
@@ -12,7 +12,7 @@
                             {{ $t('Ar_Name') }}: {{ role.ar_name }}
                         </v-card-item>
                         <v-card-item>
-                            {{ 'permisions' }}:
+                            {{ $t('Permisions') }}:
                             <div class="ma-1" v-for="m in storeRole.modules" :key="m">
 
                                 <v-chip variant="outlined" color="green">{{ m }}:</v-chip>

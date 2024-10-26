@@ -47,6 +47,7 @@
     "SucessEditAdmin": "admin Edited successfully",
     "EditAdmin": "Edit Admin",
     "Permisions": "Permisions",
+    "PermisionsInfo":"Permisions Info",
     "AddPermision": "Add Permision",
     "Permision": "Permission",
     "SucessAddPermision": "Permision added successfully",
@@ -65,7 +66,8 @@
         "En_letters": "'Please enter English letters only.",
         "Ar_letters": "'Please enter Arabic letters only.",
         "role": "Role field is required",
-        "requiredfields": "fill the required fields"
+        "requiredfields": "fill the required fields",
+        "rolepermisions": "Permisions is required"
     }
 
 }

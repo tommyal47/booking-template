@@ -48,6 +48,7 @@
     "EditAdmin": "تعديل بيانات الادمن",
     "Permisions": "الاذونات",
     "AddPermision": "إضافة إذن",
+    "PermisionsInfo":"بيانات الاذونات",
     "Permision": "إذن",
     "SucessAddPermision": "تم إضافة الإذن بنجاح",
     "SucessEditPermision": "تم تعديل الإذن بنجاح",
@@ -65,7 +66,8 @@
         "En_letters": "يرجى إدخال أحرف إنجليزية فقط.",
         "Ar_letters": "يرجى إدخال أحرف عربية فقط.",
         "role": "الدور مطلوب",
-        "requiredfields": "اكمل البيانات المطلوبة"
+        "requiredfields": "اكمل البيانات المطلوبة",
+        "rolepermisions": "الاذونات مطلوبة"
       }
     
 

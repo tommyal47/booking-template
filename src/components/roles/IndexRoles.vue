@@ -42,11 +42,11 @@ const headers = computed(() => [
     { title: t('Ar_Name'), align: 'center', key: 'ar_name' },
     // { title: "permisions", align: 'center', key: 'permisions.user' },
     {
-        title: "permisions", align: 'center', children: [
-            { title: 'user', align: 'center', key: 'permisions.user' },
-            { title: 'admin', align: 'center', key: 'permisions.admin' },
-            { title: 'role', align: 'center', key: 'permisions.role' },
-            { title: 'permisions', align: 'center', key: 'permisions.permisions' },
+        title: t('Permisions'), align: 'center', children: [
+            { title: t('Users'), align: 'center', key: 'permisions.user' },
+            { title: t('Admins'), align: 'center', key: 'permisions.admin' },
+            { title: t('RolesLable'), align: 'center', key: 'permisions.role' },
+            { title: t('Permisions'), align: 'center', key: 'permisions.permisions' },
         ]
     },
     { title: t('Actions'), align: 'center', key: 'actions' }

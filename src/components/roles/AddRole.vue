@@ -2,13 +2,13 @@
 <!-- eslint-disable vue/valid-v-for -->
 <template>
     <v-dialog v-model="dialog" persistent>
-        <v-card class="mx-auto" width="500" prepend-icon="" title="Add Role">
+        <v-card class="mx-auto" width="500" prepend-icon="" :title="$t('AddRole')">
             <v-sheet class="mx-auto" width="500">
                 <v-stepper v-model="step">
                     <v-stepper-header>
-                        <v-stepper-item title="Role Info" value="1">
+                        <v-stepper-item :title="$t('RoleInfo')" value="1">
                         </v-stepper-item>
-                        <v-stepper-item title="Permisions Info" value="2">
+                        <v-stepper-item :title="$t('PermisionsInfo')" value="2">
                         </v-stepper-item>
                     </v-stepper-header>
                     <v-stepper-window>
@@ -36,7 +36,6 @@
                             <v-container fluid>
                                 <v-row v-for="(m, index) in storeRole.modules">
                                     <div>{{ m }}</div>
-                                    <div>{{ index }}</div>
                                     <v-col cols="12" md="3" sm="4" v-for="permision in storePermision.permisions">
                                         <!-- <v-checkbox color="info" v-model="role.permisions[index]"
                                             @change="(e) => changePermision(e.target.value, index)"
@@ -250,7 +249,8 @@ const next = () => {
         }
     }
     if (step.value === 1) {
-        if (role.value.permisions) {
+        // console.log(Object.keys(role.value.permisions).length);
+        if (Object.keys(role.value.permisions).length > 0) {
             addRole()
             Toast.fire({
                 icon: "success",
@@ -259,7 +259,7 @@ const next = () => {
         } else {
             Toast.fire({
                 icon: "error",
-                title: t('errors.requiredfields')
+                title: t('errors.rolepermisions')
             });
         }
     }
