@@ -37,10 +37,6 @@
                                 <v-row v-for="(m, index) in storeRole.modules">
                                     <div>{{ m }}</div>
                                     <v-col cols="12" md="3" sm="4" v-for="permision in storePermision.permisions">
-                                        <!-- <v-checkbox color="info" v-model="role.permisions[index]"
-                                            @change="(e) => changePermision(e.target.value, index)"
-                                            :label="permision.en_name" :value="permision.en_name"
-                                            hide-details></v-checkbox> -->
                                         <v-checkbox color="info" :label="permision.en_name" :value="permision.en_name"
                                             :checked="role.permisions[m]?.includes(permision.en_name)"
                                             @change="(e) => changePermision(m, permision.en_name, e)" hide-details>
@@ -57,36 +53,6 @@
         </v-card>
     </v-dialog>
 </template>
-
-
-
-
-
-
-
-
-<!-- <template>
-    <div class="text-center pa-4">
-        <v-dialog v-model="dialog" persistent>
-            <v-card class="mx-auto" width="400" prepend-icon="" :title="$t('AddRole')">
-                <v-sheet class="mx-auto" width="300">
-                    <v-form fast-fail @submit.prevent="addRole">
-                        <v-text-field v-model="role.en_name" clearable :rules="[EnRules]" :label="$t('En_Name')"
-                            variant="solo"></v-text-field>
-
-                        <v-text-field v-model="role.ar_name" clearable :rules="[ArRules]" :label="$t('Ar_Name')"
-                            variant="solo"></v-text-field>
-
-                        <v-btn class="mt-2" type="submit" block>{{ $t('Submit') }}</v-btn>
-                        <v-btn class="mt-2" @click="$emit('handleAddDialog')" block>{{ $t('Cancel') }}</v-btn>
-                    </v-form>
-                </v-sheet>
-            </v-card>
-        </v-dialog>
-    </div>
-</template> -->
-
-
 <script setup>
 
 import { ref, defineEmits, computed } from 'vue';
@@ -95,12 +61,7 @@ import { usePermisionStore } from '@/stores/storePermisions';
 import { useI18n } from 'vue-i18n';
 const storeRole = useRoleStore()
 const storePermision = usePermisionStore()
-// const index = ref()
-// const role = ref({
-//     permisions: {
-//         role_name: []
-//     }
-// })
+
 const role = ref({
     permisions: {
     }
@@ -119,33 +80,10 @@ const addRole = () => {
     if (role.value.en_name && role.value.ar_name) {
         storeRole.addRole(role.value)
         emit('handleAddDialog')
-        // console.log(role.value);
-
     }
 }
 
-
-// const changePermision = (permisions, key) => {
-//     // index.value = key
-//     // console.log(index.value)
-//     // role.value.permisions.role_name.push(permisions)
-//     // if (role.value.permisions.role_name.includes(permisions)) {
-//     //     const index = role.value.permisions.role_name.indexOf(permisions)
-//     //     role.value.permisions.role_name.splice(index, 1)
-
-//     // }
-//     // role.value.permisions.push(key,[permisions])
-//     const p = []
-//     p.push(permisions)
-//     role.value.permisions[key] = p
-//     // if (role.value.permisions[key].includes(permisions)) {
-//     // const index = role.value.permisions[key].indexOf(permisions)
-//     // role.value.permisions[key].splice(index, 1)
-
-//     // }
-// }
 const changePermision = (key, permisions, event) => {
-    // console.log(permisions);
     if (permisions) {
         if (!Array.isArray(role.value.permisions[key])) {
             role.value.permisions[key] = []; // Initialize it as an empty array if it doesn't exist
@@ -167,29 +105,6 @@ const changePermision = (key, permisions, event) => {
     }
 
 }
-// const changePermission = (event, roleName, permissionName) => {
-//   // Ensure that the permissions array exists for the role
-//   if (!Array.isArray(role.value.permisions[roleName])) {
-//     role.value.permisions[roleName] = []; // Initialize it as an empty array if it doesn't exist
-//   }
-
-//   const permissionArray = role.value.permisions[roleName];
-
-//   if (event) {
-//     // Add the permission if it's checked
-//     if (!permissionArray.includes(permissionName)) {
-//       permissionArray.push(permissionName);
-//     }
-//   } else {
-//     // Remove the permission if it's unchecked
-//     const permIndex = permissionArray.indexOf(permissionName);
-//     if (permIndex > -1) {
-//       permissionArray.splice(permIndex, 1);
-//     }
-//   }
-// };
-
-
 const emit = defineEmits(['handleAddDialog'])
 const englishRegex = /^[A-Za-z\s]*$/;
 const EnRules = computed(() => {
@@ -230,13 +145,10 @@ const Toast = Swal.mixin({
 
 
 const next = () => {
-    // console.log(index.value);
     if (step.value === 0) {
         if (role.value.ar_name && role.value.ar_name) {
             step.value++;
             N = t('Submit')
-            // console.log(step.value);
-
             return true;
 
 
@@ -249,7 +161,6 @@ const next = () => {
         }
     }
     if (step.value === 1) {
-        // console.log(Object.keys(role.value.permisions).length);
         if (Object.keys(role.value.permisions).length > 0) {
             addRole()
             Toast.fire({
@@ -269,13 +180,7 @@ const prev = () => {
     if (step.value >= 1) {
         N = t('Next')
         step.value--;
-        // console.log(role.value);
-
     }
 };
-
-
 ///////////////////////////////////////////////////
-
-
 </script>
