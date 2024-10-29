@@ -69,7 +69,7 @@ const logIn = () => {
     if (admin.value.userName && admin.value.userPassword) {
         if (admin.value.userName === data.user_name && admin.value.userPassword === data.user_password) {
             const adminData = storeAdmin.getAdminData(admin.value.userName)
-            console.log(adminData[0].role);
+            // console.log(adminData[0].role);
             const roleData = storeRole.getRoleData(adminData[0].role);
             const roleString = JSON.stringify(roleData);
             localStorage.setItem('role', roleString)

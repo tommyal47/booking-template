@@ -1,26 +1,27 @@
 <template>
-    <v-btn v-if="can(userRole,'permisions','add')" class="add-btn" @click="handleAddPermision">{{ $t('AddPermision') }}</v-btn>
+    <v-btn v-if="can('permisions', 'add')" class="add-btn" @click="handleAddPermision">{{ $t('AddPermision') }}</v-btn>
     <v-data-table class="centerlize" :headers="headers" :items="storPermisions.permisions" density="compact"
         item-key="name">
         <template v-slot:[`item.actions`]="{ item }">
             <div class="d-flex justify-space-around flex-wrap pa-2 ml-30">
-                <v-btn v-if="can(userRole,'permisions','access')" class="ma-2" @click="showPermision(item)" color="green-lighten-1" size="33px" icon="mdi-eye"></v-btn>
-                <v-btn v-if="can(userRole,'permisions','edit')" class="ma-2" @click="editPermision(item)" color="green-lighten-1" size="33px"
-                    icon="mdi-pencil"></v-btn>
-                <v-btn v-if="can(userRole,'permisions','delete')" class="ma-2" @click="handleDeletePermision(item.id)" color="orange-lighten-1" size="33px"
-                    icon="mdi-delete"></v-btn>
+                <v-btn v-if="can('permisions', 'access')" class="ma-2" @click="showPermision(item)"
+                    color="green-lighten-1" size="33px" icon="mdi-eye"></v-btn>
+                <v-btn v-if="can('permisions', 'edit')" class="ma-2" @click="editPermision(item)" color="green-lighten-1"
+                    size="33px" icon="mdi-pencil"></v-btn>
+                <v-btn v-if="can('permisions', 'delete')" class="ma-2" @click="handleDeletePermision(item.id)"
+                    color="orange-lighten-1" size="33px" icon="mdi-delete"></v-btn>
             </div>
         </template>
     </v-data-table>
 
     <div v-if="openShowDialog">
-        <ShowPermision :permision="permision" @handleCloseDialog="handleCloseDialog"/>
+        <ShowPermision :permision="permision" @handleCloseDialog="handleCloseDialog" />
     </div>
     <div v-if="openAddDialog">
-        <AddPermision  @handleAddDialog="handleAddDialog"/>
+        <AddPermision @handleAddDialog="handleAddDialog" />
     </div>
     <div v-if="openEditDialog">
-        <EditPermision  :permision="permision" @handleEditDialog="handleEditDialog"/>
+        <EditPermision :permision="permision" @handleEditDialog="handleEditDialog" />
     </div>
 </template>
 
@@ -36,7 +37,6 @@ import Swal from 'sweetalert2';
 
 import { usePolicy } from '@/composables/usePolicy';
 const { can } = usePolicy();
-const userRole = 'permisions'
 
 const storPermisions = usePermisionStore()
 
@@ -46,7 +46,7 @@ const headers = computed(() => [
     { title: t('ID'), align: 'center', key: 'id' },
     { title: t('En_Name'), align: 'center', key: 'en_name' },
     { title: t('Ar_Name'), align: 'center', key: 'ar_name' },
-    { title: t('Actions'), align: 'center', key: 'actions' }
+    { title: t('Actions'), align: 'center', key: 'actions', width: '200px'}
 ])
 const openShowDialog = ref(false)
 const openAddDialog = ref(false)

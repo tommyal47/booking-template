@@ -1,13 +1,13 @@
 <template>
-    <v-btn v-if="can(userRole, 'admin', 'add')" class="add-btn" @click="addAdmin">{{ $t('AddAdmin') }}</v-btn>
+    <v-btn v-if="can('admin', 'add')" class="add-btn" @click="addAdmin">{{ $t('AddAdmin') }}</v-btn>
     <v-data-table class="centerlize" :headers="headers" :items="storeAdmin.admins" density="compact" item-key="name">
         <template v-slot:[`item.actions`]="{ item }">
             <div class="d-flex justify-space-around flex-wrap pa-2 ml-30">
-                <v-btn v-if="can(userRole, 'admin', 'access')" class="ma-2" color="green-lighten-1"
-                    @click="showAdmin(item)" size="33px" icon="mdi-eye"></v-btn>
-                <v-btn v-if="can(userRole, 'admin', 'edit')" class="ma-2" color="green-lighten-1" size="33px"
+                <v-btn v-if="can('admin', 'access')" class="ma-2" color="green-lighten-1" @click="showAdmin(item)"
+                    size="33px" icon="mdi-eye"></v-btn>
+                <v-btn v-if="can('admin', 'edit')" class="ma-2" color="green-lighten-1" size="33px"
                     @click="editAdmin(item)" icon="mdi-pencil"></v-btn>
-                <v-btn v-if="can(userRole, 'admin', 'delete')" class="ma-2" color="orange-lighten-1"
+                <v-btn v-if="can('admin', 'delete')" class="ma-2" color="orange-lighten-1"
                     @click="handleDeleteAdmin(item.id)" size="33px" icon="mdi-delete"></v-btn>
             </div>
         </template>
@@ -38,7 +38,6 @@ import Swal from 'sweetalert2';
 import EditAdmin from './EditAdmin.vue';
 import { usePolicy } from '@/composables/usePolicy';
 const { can } = usePolicy();
-const userRole = 'permisions'
 const storeAdmin = useAdminStore()
 const { t } = useI18n(); // Access the translation function
 
@@ -50,7 +49,7 @@ const headers = computed(() => [
     { title: t('Email'), align: 'center', key: 'email' },
     { title: t('Phone'), align: 'center', key: 'phoneNumber' },
     { title: t('Role'), align: 'center', key: 'role' },
-    { title: t('Actions'), align: 'center', key: 'actions' }
+    { title: t('Actions'), align: 'center', key: 'actions', width: '200px'}
 ])
 
 const openShowDialog = ref(false);
