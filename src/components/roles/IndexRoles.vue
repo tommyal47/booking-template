@@ -1,13 +1,13 @@
 <template>
-    <v-btn class="add-btn" @click="handleAddRole">{{ $t('AddRole') }}</v-btn>
+    <v-btn v-if="can(userRole,'role','add')" class="add-btn" @click="handleAddRole">{{ $t('AddRole') }}</v-btn>
     <v-data-table style="width: 3000px;" class="centerlize" :headers="headers" :items="storeRole.roles"
         density="compact" item-key="name">
         <template v-slot:[`item.actions`]="{ item }">
             <div class="d-flex justify-space-around flex-wrap pa-2 ml-30">
-                <v-btn class="ma-2" @click="showRole(item)" color="green-lighten-1" size="33px" icon="mdi-eye"></v-btn>
-                <v-btn class="ma-2" @click="editRole(item)" color="green-lighten-1" size="33px"
+                <v-btn v-if="can(userRole,'role','access')" class="ma-2" @click="showRole(item)" color="green-lighten-1" size="33px" icon="mdi-eye"></v-btn>
+                <v-btn v-if="can(userRole,'role','edit')" class="ma-2" @click="editRole(item)" color="green-lighten-1" size="33px"
                     icon="mdi-pencil"></v-btn>
-                <v-btn class="ma-2" @click="handleDeleteRole(item.id)" color="orange-lighten-1" size="33px"
+                <v-btn v-if="can(userRole,'role','delete')" class="ma-2" @click="handleDeleteRole(item.id)" color="orange-lighten-1" size="33px"
                     icon="mdi-delete"></v-btn>
             </div>
         </template>
@@ -31,7 +31,9 @@ import ShowRole from './ShowRole.vue';
 import AddRole from './AddRole.vue';
 import EditRole from './EditRole.vue';
 import Swal from 'sweetalert2';
-
+import { usePolicy } from '@/composables/usePolicy';
+const { can } = usePolicy();
+const userRole = 'permisions'
 const storeRole = useRoleStore()
 
 const { t } = useI18n(); // Access the translation function
@@ -123,6 +125,7 @@ const handleDeleteRole = (id) => {
     });
 }
 // console.log(storeRole.roles[0].permisions.admin);
+// console.log(storeRole.getRoleData('admin'));
 
 
 </script>

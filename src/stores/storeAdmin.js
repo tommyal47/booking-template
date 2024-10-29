@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-
+// import { useRoleStore } from "./storeRole";
 export const useAdminStore = defineStore('storeAdmin',{
     state: () => {
         return {
@@ -9,7 +9,7 @@ export const useAdminStore = defineStore('storeAdmin',{
                     fullName: 'admin',
                     email: 'admin@admin.com',
                     phoneNumber: '12345214785',
-                    role: 'super admin'
+                    role: 'admin'
                 }
             ],
         }
@@ -36,6 +36,10 @@ export const useAdminStore = defineStore('storeAdmin',{
         },
         deleteAdmin(id) {
             this.admins = this.admins.filter(admin => admin.id !== id);
+        },
+        getAdminData (adminName){
+            const adminData = this.admins.filter(admin => admin.fullName === adminName)
+            return adminData
         }
     }
 })

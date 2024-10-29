@@ -1,12 +1,11 @@
 <template>
-    <v-btn class="add-btn" @click="router.push('/add-user')">{{ $t('AddUser') }}</v-btn>
+    <v-btn v-if="can(userRole,'user','add')" class="add-btn" @click="router.push('/add-user')">{{ $t('AddUser') }}</v-btn>
     <v-data-table class="centerlize" :headers="headers" :items="userStore.users" density="compact" item-key="name">
         <template v-slot:[`item.actions`]="{ item }">
             <div class="d-flex justify-space-around flex-wrap pa-2 ml-30">
-                <v-btn class="ma-2" @click="showUser(item)" color="green-lighten-1" size="33px" icon="mdi-eye"></v-btn>
-                <v-btn class="ma-2" @click="editUser(item)" color="green-lighten-1" size="33px"
-                    icon="mdi-pencil"></v-btn>
-                <v-btn class="ma-2" @click="handleDeleteUSer(item.id)" color="orange-lighten-1" size="33px"
+                <v-btn v-if="can(userRole,'user','access')" class="ma-2" @click="showUser(item)" color="green-lighten-1" size="33px" icon="mdi-eye"></v-btn>
+                <v-btn v-if="can(userRole,'user','edit')" class="ma-2" @click="editUser(item)" color="green-lighten-1" size="33px" icon="mdi-pencil"></v-btn>
+                <v-btn v-if="can(userRole,'user','delete')" class="ma-2" @click="handleDeleteUSer(item.id)" color="orange-lighten-1" size="33px"
                     icon="mdi-delete"></v-btn>
             </div>
         </template>
@@ -33,6 +32,9 @@ import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n(); // Access the translation function
+import { usePolicy } from '@/composables/usePolicy';
+const { can } = usePolicy();
+const userRole = 'permisions'
 const router = useRouter()
 
 // const handleDelere = handleDeleteUser()

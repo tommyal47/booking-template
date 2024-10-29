@@ -26,6 +26,11 @@ import NavBar from '@/layouts/components/NavBar.vue';
 import { useI18n } from 'vue-i18n';
 import Swal from 'sweetalert2';
 const { t } = useI18n()
+import { useAdminStore } from '@/stores/storeAdmin';
+import { useRoleStore } from '@/stores/storeRole';
+
+const storeRole = useRoleStore()
+const storeAdmin = useAdminStore()
 
 const admin = ref({})
 const active = ref(false)
@@ -60,10 +65,15 @@ const Toast = Swal.mixin({
     }
 });
 
-
 const logIn = () => {
     if (admin.value.userName && admin.value.userPassword) {
         if (admin.value.userName === data.user_name && admin.value.userPassword === data.user_password) {
+            const adminData = storeAdmin.getAdminData(admin.value.userName)
+            console.log(adminData[0].role);
+            const roleData = storeRole.getRoleData(adminData[0].role);
+            const roleString = JSON.stringify(roleData);
+            localStorage.setItem('role', roleString)
+
             Toast.fire({
                 icon: "success",
                 title: t('SuccessLogin')

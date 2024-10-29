@@ -17,7 +17,7 @@ export const useRoleStore = defineStore('storeRole', {
                     }
                 },
                 {
-                    id: 1,
+                    id: 2,
                     en_name: 'tester',
                     ar_name: 'مدير',
                     permisions: {
@@ -55,6 +55,10 @@ export const useRoleStore = defineStore('storeRole', {
         deleteRole (id) {
             this.roles = this.roles.filter(role => role.id!== id)
   
+        },
+        getRoleData(name) {
+            const role = this.roles.filter(r => r.en_name === name)
+            return role
         }
-    }
+    },
 })

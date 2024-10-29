@@ -1,13 +1,13 @@
 <template>
-    <v-btn class="add-btn" @click="handleAddPermision">{{ $t('AddPermision') }}</v-btn>
+    <v-btn v-if="can(userRole,'permisions','add')" class="add-btn" @click="handleAddPermision">{{ $t('AddPermision') }}</v-btn>
     <v-data-table class="centerlize" :headers="headers" :items="storPermisions.permisions" density="compact"
         item-key="name">
         <template v-slot:[`item.actions`]="{ item }">
             <div class="d-flex justify-space-around flex-wrap pa-2 ml-30">
-                <v-btn class="ma-2" @click="showPermision(item)" color="green-lighten-1" size="33px" icon="mdi-eye"></v-btn>
-                <v-btn class="ma-2" @click="editPermision(item)" color="green-lighten-1" size="33px"
+                <v-btn v-if="can(userRole,'permisions','access')" class="ma-2" @click="showPermision(item)" color="green-lighten-1" size="33px" icon="mdi-eye"></v-btn>
+                <v-btn v-if="can(userRole,'permisions','edit')" class="ma-2" @click="editPermision(item)" color="green-lighten-1" size="33px"
                     icon="mdi-pencil"></v-btn>
-                <v-btn class="ma-2" @click="handleDeletePermision(item.id)" color="orange-lighten-1" size="33px"
+                <v-btn v-if="can(userRole,'permisions','delete')" class="ma-2" @click="handleDeletePermision(item.id)" color="orange-lighten-1" size="33px"
                     icon="mdi-delete"></v-btn>
             </div>
         </template>
@@ -33,6 +33,10 @@ import AddPermision from './AddPermision.vue';
 import EditPermision from './EditPermision.vue';
 
 import Swal from 'sweetalert2';
+
+import { usePolicy } from '@/composables/usePolicy';
+const { can } = usePolicy();
+const userRole = 'permisions'
 
 const storPermisions = usePermisionStore()
 
