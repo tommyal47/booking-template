@@ -9,7 +9,16 @@ export const useAdminStore = defineStore('storeAdmin',{
                     fullName: 'admin',
                     email: 'admin@admin.com',
                     phoneNumber: '12345214785',
-                    role: 'admin'
+                    role: 'admin',
+                    password: '12345'
+                },
+                {
+                    id: 1,
+                    fullName: 'tester',
+                    email: 'tester@admin.com',
+                    phoneNumber: '12345214785',
+                    role: 'tester',
+                    password: '123456'
                 }
             ],
         }

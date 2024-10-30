@@ -10,12 +10,6 @@
             <v-btn class="mt-2" :text="$t('Login')" type="submit" block></v-btn>
         </v-form>
     </v-sheet>
-    <!-- <div>
-        <v-alert class="alert-error" color="red" type="error" density="compact" icon="mdi-firework" theme="dark"
-            v-model="active">
-            {{ $t('errors.login') }}
-        </v-alert>
-    </div> -->
 </template>
 
 
@@ -35,10 +29,6 @@ const storeAdmin = useAdminStore()
 const admin = ref({})
 const active = ref(false)
 
-const data = {
-    user_name: 'admin',
-    user_password: '12345'
-}
 
 const nameRules = computed(() => {
     if (admin.value.userName) return true
@@ -67,9 +57,10 @@ const Toast = Swal.mixin({
 
 const logIn = () => {
     if (admin.value.userName && admin.value.userPassword) {
-        if (admin.value.userName === data.user_name && admin.value.userPassword === data.user_password) {
+        const index = storeAdmin.admins.findIndex((a) => a.fullName === admin.value.userName)
+        const adminData = storeAdmin.admins[index]
+        if (admin.value.userName === adminData.fullName && admin.value.userPassword === adminData.password) {
             const adminData = storeAdmin.getAdminData(admin.value.userName)
-            // console.log(adminData[0].role);
             const roleData = storeRole.getRoleData(adminData[0].role);
             const roleString = JSON.stringify(roleData);
             localStorage.setItem('role', roleString)
@@ -82,17 +73,12 @@ const logIn = () => {
                 localStorage.setItem('auth', true)
                 window.location.href = '/users'
             }, 1000)
-            // localStorage.setItem('auth', true)
-            // window.location.href = '/users'
         } else {
             active.value = true
             Toast.fire({
                 icon: "error",
                 title: t('errors.login')
             });
-            // setTimeout(() => {
-            //     active.value = false
-            // }, 3000)
         }
     }
 }
