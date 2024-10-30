@@ -71,7 +71,7 @@ const logIn = () => {
             });
             setTimeout(() => {
                 localStorage.setItem('auth', true)
-                window.location.href = '/users'
+                window.location.href = '/'
             }, 1000)
         } else {
             active.value = true

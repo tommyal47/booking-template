@@ -6,6 +6,8 @@ import LogIn from '@/views/LogIn.vue'
 import RolesIndex from '@/views/roles/RolesIndex.vue'
 import AdminsIndex from '@/views/SystemAdmins/AdminsIndex.vue'
 import PermisionsIndex from '@/views/permisions/PermisionsIndex.vue'
+// import { usePolicy } from '@/composables/usePolicy';
+// const { can } = usePolicy();
 
 
 const router = createRouter({
@@ -64,4 +66,12 @@ router.beforeEach((to, from, next) => {
   else next()
   
 })
+// router.beforeEach((to, from, next) => {
+//   // const userRole = 'editor'; // Get the user's role from your auth logic
+//   if (to.meta.resource && !can(to.meta.resource, to.meta.action)) {
+//     next('/unauthorized'); // Redirect if unauthorized
+//   } else {
+//     next();
+//   }
+// });
 export default router

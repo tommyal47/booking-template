@@ -7,18 +7,18 @@
                     <v-list-item color="primary" rounded="shaped" prepend-icon="mdi-home" :title="$t('Home')"
                         value="Home" @click="goToHome" :active="isActive('/')">
                     </v-list-item>
-                    <v-list-item color="primary" rounded="shaped" prepend-icon="mdi-account-multiple"
+                    <v-list-item v-if="can('user', 'access')" color="primary" rounded="shaped" prepend-icon="mdi-account-multiple"
                         :title="$t('Users')" value="Users" @click="goToUseres" :active="isActive('/users')">
                     </v-list-item>
-                    <v-list-item color="primary" rounded="shaped" prepend-icon="mdi-account-key"
+                    <v-list-item v-if="can('role', 'access')" color="primary" rounded="shaped" prepend-icon="mdi-account-key"
                         :title="$t('RolesLable')" value="Roles" @click="$router.push('/roles')"
                         :active="isActive('/roles')">
                     </v-list-item>
-                    <v-list-item color="primary" rounded="shaped" prepend-icon="mdi-account-supervisor"
+                    <v-list-item v-if="can('admin', 'access')" color="primary" rounded="shaped" prepend-icon="mdi-account-supervisor"
                         :title="$t('Admins')" value="Roles" @click="$router.push('/admins')"
                         :active="isActive('/admins')">
                     </v-list-item>
-                    <v-list-item color="primary" rounded="shaped" prepend-icon="mdi-account-key"
+                    <v-list-item v-if="can('permisions', 'access')" color="primary" rounded="shaped" prepend-icon="mdi-account-key"
                         :title="$t('Permisions')" value="Roles" @click="$router.push('/permisions')"
                         :active="isActive('/permisions')">
                     </v-list-item>
@@ -30,7 +30,8 @@
 
 <script setup>
 import { useRouter, useRoute } from 'vue-router';
-
+import { usePolicy } from '@/composables/usePolicy';
+const { can } = usePolicy();
 // const active = ref(true);
 const router = useRouter();
 const route = useRoute();

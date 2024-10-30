@@ -21,7 +21,7 @@ export const useRoleStore = defineStore('storeRole', {
                     en_name: 'tester',
                     ar_name: 'مختبر',
                     permisions: {
-                        user: ['add','edit','delete','access'],
+                        user: ['edit','delete'],
                         admin: ['access'],
                         role: ['add','edit','access'],
                         permisions: ['add','access']
