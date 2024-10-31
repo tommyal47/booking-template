@@ -1,14 +1,19 @@
 <script setup>
-import { ref } from 'vue';
+// import { ref } from 'vue';
 import { RouterView } from 'vue-router'
 import MainLayout from './layouts/MainLayout.vue';
+import { getCookie } from './services/cookies';
 
-const loggedIn = ref(localStorage.getItem('auth'));
+// const loggedIn = ref(localStorage.getItem('auth'));
+const authanticated = getCookie('auth');
+console.log(authanticated);
+
+
 
 </script>
 
 <template>
-  <MainLayout v-if="loggedIn" />
+  <MainLayout v-if="authanticated" />
   <RouterView />
 </template>
 

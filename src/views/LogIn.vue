@@ -22,6 +22,13 @@ import Swal from 'sweetalert2';
 const { t } = useI18n()
 import { useAdminStore } from '@/stores/storeAdmin';
 import { useRoleStore } from '@/stores/storeRole';
+import { setCookie } from '@/services/cookies';
+
+const saveAuth = () => {
+    setCookie('auth', true, 1)
+    console.log('cookie saved');
+
+}
 
 const storeRole = useRoleStore()
 const storeAdmin = useAdminStore()
@@ -70,7 +77,8 @@ const logIn = () => {
                 title: t('SuccessLogin')
             });
             setTimeout(() => {
-                localStorage.setItem('auth', true)
+                // localStorage.setItem('auth', true)
+                saveAuth()
                 window.location.href = '/'
             }, 1000)
         } else {

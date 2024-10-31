@@ -11,7 +11,7 @@
 <script setup>
 import { useI18n } from 'vue-i18n';
 import { computed, onMounted } from 'vue';
-
+import { deleteCookie } from '@/services/cookies';
 const loggedIn = computed(() => {
     return localStorage.getItem('auth') ? true : false;
 })
@@ -20,6 +20,7 @@ const { locale } = useI18n();
 
 const handleLogout = () => {
     localStorage.clear();
+    deleteCookie('auth');
     window.location.href = '/login';
 }
 
