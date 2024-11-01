@@ -6,10 +6,6 @@ import { getCookie } from './services/cookies';
 
 // const loggedIn = ref(localStorage.getItem('auth'));
 const authanticated = getCookie('auth');
-console.log(authanticated);
-
-
-
 </script>
 
 <template>

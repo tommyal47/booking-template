@@ -11,9 +11,10 @@
 <script setup>
 import { useI18n } from 'vue-i18n';
 import { computed, onMounted } from 'vue';
-import { deleteCookie } from '@/services/cookies';
+import { deleteCookie, getCookie } from '@/services/cookies';
 const loggedIn = computed(() => {
-    return localStorage.getItem('auth') ? true : false;
+    return getCookie('auth')
+    // return localStorage.getItem('auth') ? true : false;
 })
 
 const { locale } = useI18n();

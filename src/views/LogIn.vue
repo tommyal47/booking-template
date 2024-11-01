@@ -26,8 +26,6 @@ import { setCookie } from '@/services/cookies';
 
 const saveAuth = () => {
     setCookie('auth', true, 1)
-    console.log('cookie saved');
-
 }
 
 const storeRole = useRoleStore()

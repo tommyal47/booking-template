@@ -6,6 +6,7 @@ import LogIn from '@/views/LogIn.vue'
 import RolesIndex from '@/views/roles/RolesIndex.vue'
 import AdminsIndex from '@/views/SystemAdmins/AdminsIndex.vue'
 import PermisionsIndex from '@/views/permisions/PermisionsIndex.vue'
+import { getCookie } from '@/services/cookies'
 // import { usePolicy } from '@/composables/usePolicy';
 // const { can } = usePolicy();
 
@@ -59,7 +60,8 @@ const router = createRouter({
   ]
 })
 function isAuthenticated() {
-  return !!localStorage.getItem('auth');  // Check for a token in localStorage (or any auth status)
+  // return !!localStorage.getItem('auth');  // Check for a token in localStorage (or any auth status)
+  return !!getCookie('auth');
 }
 router.beforeEach((to, from, next) => {
   if(to.name !== 'login' && !isAuthenticated()) next({name: 'login'})
