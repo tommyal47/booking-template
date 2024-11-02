@@ -18,20 +18,6 @@
                             <v-text-field v-model="role.ar_name" clearable :rules="[ArRules]" :label="$t('Ar_Name')"
                                 variant="solo"></v-text-field>
                         </v-stepper-window-item>
-                        <!-- <v-stepper-window-item step="2" value="2">
-                            <v-container fluid>
-                                <v-row v-for="(r, index) in storeRole.roles">
-                                    <div>{{ r.en_name }}</div>
-                                    <div>{{ index }}</div>
-                                    <v-col cols="12" md="3" sm="4" v-for="permision in storePermision.permisions">
-                                        <v-checkbox color="info" v-model="role.permisions.role_name"
-                                            @change="(e) => changePermision(e.target.value, index)"
-                                            :label="permision.en_name" :value="permision.en_name"
-                                            hide-details></v-checkbox>
-                                    </v-col>
-                                </v-row>
-                            </v-container>
-                        </v-stepper-window-item> -->
                         <v-stepper-window-item step="2" value="2">
                             <v-container fluid>
                                 <v-row v-for="(m, index) in storeRole.modules">
@@ -69,9 +55,6 @@ const role = ref({
 const disabled = computed(() => step.value === 0 ? 'prev' : false)
 const { t } = useI18n();
 import Swal from 'sweetalert2';
-// console.log(role_namew);
-
-
 
 const step = ref(0)
 let N = t('Next')
@@ -150,8 +133,6 @@ const next = () => {
             step.value++;
             N = t('Submit')
             return true;
-
-
         }
         if (!role.value.ar_name || !role.value.ar_name) {
             Toast.fire({

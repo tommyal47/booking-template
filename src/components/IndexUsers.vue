@@ -27,7 +27,6 @@ import ShowUser from './ShowUser.vue';
 import EditUser from './EditUser.vue';
 import { computed, ref } from 'vue';
 import Swal from 'sweetalert2';
-// import handleDeleteUser from './DeleteUser.vue'
 import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 
@@ -36,10 +35,7 @@ import { usePolicy } from '@/composables/usePolicy';
 const { can } = usePolicy();
 const router = useRouter()
 
-// const handleDelere = handleDeleteUser()
-
 const userStore = useUserStore();
-// console.log(userStore.users[0].id);
 
 const headers = computed(() => [
     { title: t('Name'), align: 'center', key: 'fullName' },
@@ -56,17 +52,12 @@ const user = ref(null);
 const showUser = (item) => {
     openShowDialog.value = true;
     user.value = item;
-    // console.log(id);
-
 }
 
 const editUser = (item) => {
     openEditDialog.value = true;
     user.value = item;
-    // console.log('item', item);
-
 }
-// console.log(userStore.users);
 
 const handleCloseDialog = () => {
     openShowDialog.value = false;
@@ -95,10 +86,6 @@ const handleDeleteUSer = (id) => {
         confirmButtonText: t('DeleteConfirm'),
         cancelButtonText: t('DeleteCancel'),
         reverseButtons: true,
-        // customClass: {
-        //     // confirmButton: 'swal-confirm-button', // Add a custom class to the confirm button
-        //     // cancelButton: 'swal-cancel-button',   // Optional: add a class to the cancel button if needed
-        // },
     }).then((result) => {
         if (result.isConfirmed) {
             userStore.deleteUser(id)

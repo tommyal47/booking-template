@@ -30,7 +30,6 @@ const props = defineProps({
         Required: true,
     }
 })
-// console.log(props.user);
 
 const dialog = ref(true);
 defineEmits(['handleCloseDialog'])

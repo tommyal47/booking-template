@@ -93,10 +93,6 @@ const handleDeletePermision = (id) => {
         confirmButtonText: t('DeleteConfirm'),
         cancelButtonText: t('DeleteCancel'),
         reverseButtons: true,
-        // customClass: {
-        //     // confirmButton: 'swal-confirm-button', // Add a custom class to the confirm button
-        //     // cancelButton: 'swal-cancel-button',   // Optional: add a class to the cancel button if needed
-        // },
     }).then((result) => {
         if (result.isConfirmed) {
             storPermisions.deletePermission(id)

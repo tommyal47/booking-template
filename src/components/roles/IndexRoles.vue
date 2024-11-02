@@ -42,7 +42,6 @@ const headers = computed(() => [
     { title: t('ID'), align: 'center', key: 'id' },
     { title: t('En_Name'), align: 'center', key: 'en_name' },
     { title: t('Ar_Name'), align: 'center', key: 'ar_name' },
-    // { title: "permisions", align: 'center', key: 'permisions.user' },
     {
         title: t('Permisions'), align: 'center', children: [
             { title: t('Users'), align: 'center', key: 'permisions.user' },
@@ -98,10 +97,6 @@ const handleDeleteRole = (id) => {
         confirmButtonText: t('DeleteConfirm'),
         cancelButtonText: t('DeleteCancel'),
         reverseButtons: true,
-        // customClass: {
-        //     // confirmButton: 'swal-confirm-button', // Add a custom class to the confirm button
-        //     // cancelButton: 'swal-cancel-button',   // Optional: add a class to the cancel button if needed
-        // },
     }).then((result) => {
         if (result.isConfirmed) {
             storeRole.deleteRole(id)
@@ -124,8 +119,5 @@ const handleDeleteRole = (id) => {
         }
     });
 }
-// console.log(storeRole.roles[0].permisions.admin);
-// console.log(storeRole.getRoleData('admin'));
-
 
 </script>

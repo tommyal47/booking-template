@@ -32,7 +32,6 @@ import { computed, ref } from 'vue';
 import { useAdminStore } from '@/stores/storeAdmin';
 import ShowAdmin from './ShowAdmin.vue';
 import AddAdmin from './AddAdmin.vue';
-// import handleDeleteUser from './DeleteUser.vue'
 import { useI18n } from 'vue-i18n';
 import Swal from 'sweetalert2';
 import EditAdmin from './EditAdmin.vue';
@@ -40,9 +39,6 @@ import { usePolicy } from '@/composables/usePolicy';
 const { can } = usePolicy();
 const storeAdmin = useAdminStore()
 const { t } = useI18n(); // Access the translation function
-
-// const handleDelere = handleDeleteUser()
-
 
 const headers = computed(() => [
     { title: t('Name'), align: 'center', key: 'fullName' },

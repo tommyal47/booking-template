@@ -18,9 +18,6 @@
                         <v-btn class="mt-2" @click="$emit('handleEditDialog')" block>{{ $t('Cancel') }}</v-btn>
                     </v-form>
                 </v-sheet>
-                <!-- <template v-slot:actions>
-                    <v-btn class="ms-auto" text="Ok" @click="$emit('handleEditDialog')"></v-btn>
-                </template> -->
             </v-card>
         </v-dialog>
     </div>
@@ -49,8 +46,6 @@ const props = defineProps({
     }
 })
 const userData = JSON.parse(JSON.stringify(props.user));
-// console.log('user', props.user);
-
 
 const emailRules = computed(() => {
     if (props.user.email) return true
@@ -78,9 +73,5 @@ const updateUser = () => {
 
 
 }
-
-// console.log(props.user);
-
-
 
 </script>

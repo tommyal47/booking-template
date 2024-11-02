@@ -12,7 +12,6 @@
         :rules="[phoneRules]"></v-text-field>
 
       <v-btn class="mt-2" type="submit" block>{{$t('Submit')}}</v-btn>
-      <!-- <v-btn class="mt-2" block>back</v-btn> -->
     </v-form>
   </v-sheet>
 </template>
