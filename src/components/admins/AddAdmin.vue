@@ -1,6 +1,9 @@
 <template>
   <v-dialog v-model="dialog" persistent>
-    <v-card class="mx-auto" width="500" prepend-icon="" :title="$t('AddAdmin')">
+    <v-card class="mx-auto" width="500" append-icon="" :title="$t('AddAdmin')">
+      <v-card-title>
+        <v-btn icon="mdi-close" variant="text" @click="emit('handleCloseDialog')"></v-btn>
+      </v-card-title>
       <v-sheet class="mx-auto" width="500">
         <v-stepper v-model="step">
           <!-- <template v-slot:default="{ prev, next }"> -->
@@ -24,7 +27,8 @@
             <v-stepper-window-item step="2" value="2">
               <!-- <v-text-field clearable v-model="admin.role" :label="$t('Role')" variant="solo"
                 :rules="[roleRules]"></v-text-field> -->
-              <v-select :label="$t('Role')" v-model="admin.role" :items="allRoles" variant="solo" :rules="[roleRules]"></v-select>
+              <v-select :label="$t('Role')" v-model="admin.role" :items="allRoles" variant="solo"
+                :rules="[roleRules]"></v-select>
             </v-stepper-window-item>
             <v-stepper-window-item step="3" value="3">
               <v-text-field clearable v-model="admin.password" type="password" :label="$t('Password')" variant="solo"
