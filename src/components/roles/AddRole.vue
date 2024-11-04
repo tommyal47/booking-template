@@ -2,7 +2,12 @@
 <!-- eslint-disable vue/valid-v-for -->
 <template>
     <v-dialog v-model="dialog" persistent>
-        <v-card class="mx-auto" width="500" prepend-icon="" :title="$t('AddRole')">
+        <v-card class="mx-auto" width="500">
+            <v-card-title>
+                {{ $t('AddRole') }}
+                <v-btn style="float: right; margin-left: 50px;" icon="mdi-close" variant="text"
+                    @click="$emit('handleAddDialog')"></v-btn>
+            </v-card-title>
             <v-sheet class="mx-auto" width="500">
                 <v-stepper v-model="step">
                     <v-stepper-header>
