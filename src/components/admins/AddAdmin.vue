@@ -1,8 +1,10 @@
 <template>
   <v-dialog v-model="dialog" persistent>
-    <v-card class="mx-auto" width="500" append-icon="" :title="$t('AddAdmin')">
+    <v-card class="mx-auto" width="500">
       <v-card-title>
-        <v-btn icon="mdi-close" variant="text" @click="emit('handleCloseDialog')"></v-btn>
+        {{ $t('AddAdmin') }}
+        <v-btn style="float: right; margin-left: 50px;" icon="mdi-close" variant="text"
+          @click="$emit('handleCloseDialog')"></v-btn>
       </v-card-title>
       <v-sheet class="mx-auto" width="500">
         <v-stepper v-model="step">
