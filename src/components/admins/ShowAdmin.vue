@@ -6,18 +6,19 @@
                     <v-card class="mx-auto" width="400" prepend-icon="" :title="$t('AdminInfo')"
                         :subtitle="$t('ID') + ': ' + props.admin.id">
                         <v-card-item>
-                            {{$t('Name')}}: {{ admin.fullName }}
+                            {{ $t('Name') }}: {{ admin.fullName }}
                         </v-card-item>
                         <v-card-item>
-                            {{$t('Email')}}: {{ admin.email }}
+                            {{ $t('Email') }}: {{ admin.email }}
                         </v-card-item>
                         <v-card-item>
-                            {{$t('Phone')}}: {{ admin.phoneNumber }}
+                            {{ $t('Phone') }}: {{ admin.phoneNumber }}
                         </v-card-item>
                         <v-card-item>
-                            {{$t('Role')}}: {{ admin.role }}
+                            {{ $t('Role') }}: {{ admin.role }}
                         </v-card-item>
                         <template v-slot:actions>
+                            <v-btn>change password</v-btn>
                             <v-btn class="ms-auto" :text="$t('Close')" @click="$emit('handleCloseDialog')"></v-btn>
                         </template>
                     </v-card>
