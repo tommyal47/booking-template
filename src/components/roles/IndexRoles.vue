@@ -2,6 +2,26 @@
     <v-btn v-if="can('role', 'add')" class="add-btn" @click="handleAddRole">{{ $t('AddRole') }}</v-btn>
     <v-data-table style="width: 3000px;" class="centerlize" :headers="headers" :items="storeRole.roles"
         density="compact" item-key="name">
+        <template v-slot:[`item.permisions.user`]="{ item }">
+            <div>
+                {{ item.permisions.user.join(' , ') }}
+            </div>
+        </template>
+        <template v-slot:[`item.permisions.admin`]="{ item }">
+            <div>
+                {{ item.permisions.admin.join(' , ') }}
+            </div>
+        </template>
+        <template v-slot:[`item.permisions.role`]="{ item }">
+            <div>
+                {{ item.permisions.role.join(' , ') }}
+            </div>
+        </template>
+        <template v-slot:[`item.permisions.permisions`]="{ item }">
+            <div>
+                {{ item.permisions.permisions.join(' , ') }}
+            </div>
+        </template>
         <template v-slot:[`item.actions`]="{ item }">
             <div class="d-flex justify-space-around flex-wrap pa-2 ml-30">
                 <v-btn v-if="can('role', 'access')" class="ma-2" @click="showRole(item)" color="green-lighten-1"
@@ -43,14 +63,15 @@ const headers = computed(() => [
     { title: t('En_Name'), align: 'center', key: 'en_name' },
     { title: t('Ar_Name'), align: 'center', key: 'ar_name' },
     {
-        title: t('Permisions'), align: 'center', children: [
+        title: t('Permisions'), align: 'center', key: 'Permisions'
+        , children: [
             { title: t('Users'), align: 'center', key: 'permisions.user' },
             { title: t('Admins'), align: 'center', key: 'permisions.admin' },
             { title: t('RolesLable'), align: 'center', key: 'permisions.role' },
             { title: t('Permisions'), align: 'center', key: 'permisions.permisions' },
         ]
     },
-    { title: t('Actions'), align: 'center', key: 'actions', width: '200px'}
+    { title: t('Actions'), align: 'center', key: 'actions', width: '200px' }
 ])
 const openShowDialog = ref(false)
 const openAddDialog = ref(false)
