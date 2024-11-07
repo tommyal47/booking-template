@@ -9,6 +9,7 @@
 
             <v-btn class="mt-2" :text="$t('Login')" type="submit" block></v-btn>
         </v-form>
+        <GoogleLogin />
     </v-sheet>
 </template>
 
@@ -23,11 +24,11 @@ const { t } = useI18n()
 import { useAdminStore } from '@/stores/storeAdmin';
 import { useRoleStore } from '@/stores/storeRole';
 import { setCookie } from '@/services/cookies';
+import GoogleLogin from '@/components/GoogleLogin.vue';
 
 const saveAuth = () => {
     setCookie('auth', true, 1)
 }
-
 const storeRole = useRoleStore()
 const storeAdmin = useAdminStore()
 

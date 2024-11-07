@@ -16,6 +16,9 @@ import '@mdi/font/css/materialdesignicons.css'
 
 import App from './App.vue'
 import router from './router'
+import GoogleSignInPlugin from "vue3-google-signin"
+
+
 
 const app = createApp(App)
 
@@ -41,5 +44,7 @@ app.use(createPinia())
 app.use(router)
 app.use(vuetify)
 app.use(i18n)
+app.use(GoogleSignInPlugin, {
+  clientId: '284209504655-mjekollrk8bl5vbdefp2tmpi2jf31lh8.apps.googleusercontent.com'});
 app.mount('#app')
 
