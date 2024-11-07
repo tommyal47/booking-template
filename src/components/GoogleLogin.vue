@@ -8,10 +8,10 @@ const roleString = [{
     en_name: 'admin',
     ar_name: 'مدير',
     permisions: {
-        user: ['add', 'edit', 'delete', 'access'],
-        admin: ['add', 'edit', 'delete', 'access'],
-        role: ['add', 'edit', 'delete', 'access'],
-        permisions: ['add', 'edit', 'delete', 'access']
+        user: ['access'],
+        admin: ['access'],
+        role: ['access'],
+        permisions: ['access']
     }
 }]
 import {
