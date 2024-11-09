@@ -1,19 +1,10 @@
 <script setup lang="ts">
+import { useRoleStore } from "@/stores/storeRole";
 import { setCookie } from "@/services/cookies";
 const saveAuth = () => {
     setCookie('auth', true, 1)
 }
-const roleString = [{
-    id: 1,
-    en_name: 'admin',
-    ar_name: 'مدير',
-    permisions: {
-        user: ['access'],
-        admin: ['access'],
-        role: ['access'],
-        permisions: ['access']
-    }
-}]
+const role = useRoleStore().getRoleData('vesitor')
 import {
     GoogleSignInButton,
     type CredentialResponse,
@@ -23,7 +14,8 @@ import {
 const handleLoginSuccess = (response: CredentialResponse) => {
     const { credential } = response;
     saveAuth()
-    localStorage.setItem('role', JSON.stringify(roleString))
+    localStorage.setItem('role', JSON.stringify(role))
+    localStorage.setItem('credential', credential)
     window.location.href = '/'
     console.log("Access Token", credential);
 };
