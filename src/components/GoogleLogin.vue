@@ -15,7 +15,6 @@ const handleLoginSuccess = (response: CredentialResponse) => {
     const { credential } = response;
     saveAuth()
     localStorage.setItem('role', JSON.stringify(role))
-    localStorage.setItem('credential', credential)
     window.location.href = '/'
     console.log("Access Token", credential);
 };
