@@ -14,11 +14,23 @@ import {
 // handle success event
 const handleLoginSuccess = (response: CredentialResponse) => {
     const { credential } = response;
-    // token = credential
-
     saveAuth()
+    ////////////////////////////
+    // Use the access token to retrieve user profile data
+    fetch('https://www.googleapis.com/userinfo/v2/me', {
+        headers: {
+            Authorization: `Bearer ${credential}`
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            // Extract the desired user profile information (e.g., name, email)
+            console.log('User profile:', data);
+            localStorage.setItem('profile', data)
+            // Use the information as needed (e.g., display on your website, store securely)
+        })
+    ////////////////////////////
     localStorage.setItem('role', JSON.stringify(role))
-    localStorage.setItem('token', credential)
     localStorage.setItem('token', credential)
     window.location.href = '/'
     console.log("Access Token", credential);
