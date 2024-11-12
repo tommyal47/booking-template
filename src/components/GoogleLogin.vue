@@ -17,21 +17,45 @@ const handleLoginSuccess = (response: CredentialResponse) => {
     saveAuth()
     ////////////////////////////
     // Use the access token to retrieve user profile data
+    // fetch('https://www.googleapis.com/userinfo/v2/me', {
+    //     headers: {
+    //         Authorization: `Bearer ${response}`
+    //     }
+    // })
+    //     .then(response => response.json())
+    //     .then(data => {
+    //         // Extract the desired user profile information (e.g., name, email)
+    //         console.log('User profile:', data);
+    //         localStorage.setItem('profile', data)
+    //         localStorage.setItem('dede', 'data')
+    //         // Use the information as needed (e.g., display on your website, store securely)
+    //     })
+
     fetch('https://www.googleapis.com/userinfo/v2/me', {
+        method: 'GET',
         headers: {
             Authorization: `Bearer ${credential}`
         }
     })
         .then(response => response.json())
         .then(data => {
-            // Extract the desired user profile information (e.g., name, email)
+            // Log the user profile information
             console.log('User profile:', data);
-            localStorage.setItem('profile', data)
-            // Use the information as needed (e.g., display on your website, store securely)
+
+            // Store the profile data in localStorage as a JSON string
+            localStorage.setItem('profile', JSON.stringify(data));
+
+            // Test localStorage with a sample string
+            localStorage.setItem('dede', 'data');
         })
+        .catch(error => {
+            console.error("Error fetching user profile:", error);
+        });
+
     ////////////////////////////
     localStorage.setItem('role', JSON.stringify(role))
     localStorage.setItem('token', credential)
+    onSignIn(credential)
     window.location.href = '/'
     console.log("Access Token", credential);
 };
@@ -48,10 +72,12 @@ function onSignIn(googleUser) {
     console.log('Name: ' + profile.getName());
     console.log('Image URL: ' + profile.getImageUrl());
     console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    localStorage.setItem('dede', 'data');
 }
 
 </script>
 
 <template>
-    <GoogleSignInButton @success="handleLoginSuccess" @error="handleLoginError"></GoogleSignInButton>
+    <GoogleSignInButton @success="handleLoginSuccess" @error="handleLoginError">
+    </GoogleSignInButton>
 </template>
