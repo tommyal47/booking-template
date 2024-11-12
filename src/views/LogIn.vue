@@ -24,7 +24,7 @@ const { t } = useI18n()
 import { useAdminStore } from '@/stores/storeAdmin';
 import { useRoleStore } from '@/stores/storeRole';
 import { setCookie } from '@/services/cookies';
-// import GoogleLogin from '@/components/GoogleLogin.vue';
+import GoogleLogin from '@/components/GoogleLogin.vue';
 
 const saveAuth = () => {
     setCookie('auth', true, 1)
