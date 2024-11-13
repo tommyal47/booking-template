@@ -20,12 +20,12 @@ import { ref, computed } from 'vue'
 import NavBar from '@/layouts/components/NavBar.vue';
 import { useI18n } from 'vue-i18n';
 import Swal from 'sweetalert2';
-const { t } = useI18n()
 import { useAdminStore } from '@/stores/storeAdmin';
 import { useRoleStore } from '@/stores/storeRole';
 import { setCookie } from '@/services/cookies';
 import GoogleLogin from '@/components/GoogleLogin.vue';
 
+const { t } = useI18n()
 const saveAuth = () => {
     setCookie('auth', true, 1)
 }
